@@ -4,11 +4,24 @@
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="import" href="bower_components/polymer/polymer.html">
   <link rel="import" href="bower_components/google-map/google-map.html">
+  <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 </head>
 <body>
 
 	<google-map></google-map>
+  <test-elem></test-elem>
 
+  <dom-module id="test-elem">
+    <template>
+      <iron-ajax
+        auto
+        url="endeavour-journal.json"
+        handle-as="json"
+        on-response="_on_response"
+        last-response="{{agencies}}}">
+      </iron-ajax>
+    </template>
+  </dom-module>
+  <script src="scripts/scripts.js"></script>
 </body>
-
 </html>
