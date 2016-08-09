@@ -9,19 +9,10 @@
 <body>
 
 	<google-map></google-map>
-  <test-elem></test-elem>
+  <index-elem></index-elem>
 
-  <dom-module id="test-elem">
-    <template>
-      <iron-ajax
-        auto
-        url="endeavour-journal.json"
-        handle-as="json"
-        on-response="_on_response"
-        last-response="{{agencies}}}">
-      </iron-ajax>
-    </template>
-  </dom-module>
+
+  <link rel="import" href="elements.html">
   <script src="scripts/scripts.js"></script>
 </body>
 </html>
