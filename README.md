@@ -4,4 +4,4 @@ App making use of journal entires by Captain James Cook onboard HMS Endeavour, 1
 
 Built with Polymer
 
-Dataset provided download from National Library of Australia
+Dataset downloaded from National Library of Australia
