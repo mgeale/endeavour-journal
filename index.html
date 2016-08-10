@@ -5,25 +5,13 @@
   <link rel="import" href="bower_components/polymer/polymer.html">
   <link rel="import" href="bower_components/google-map/google-map.html">
   <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+  <link rel="import" href="elements/elements.html">
 </head>
 <body>
-  <!-- Page elements -->
-  <google-map fit-to-markers></google-map>
+
+  <google-map></google-map>
   <index-elem></index-elem>
 
-  <!-- Data Binding -->
-  <dom-module id="index-elem">
-    <template>
-      <iron-ajax
-        auto
-        url="endeavour-journal.json"
-        handle-as="json"
-        on-response="_on_response">
-      </iron-ajax>
-    </template>
-  </dom-module>
-  
   <script src="scripts/scripts.js"></script>
-  
 </body>
 </html>

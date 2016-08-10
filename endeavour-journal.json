@@ -1,6 +1,10 @@
-{"day":[
-    {"date": "1768-07-29","filename": "17680729.html","pages": {"page": "http://nla.gov.au/nla.ms-ms1-s5r"}},
-    {
+{"day":[{
+        "date": "1768-07-29",
+        "filename": "17680729.html",
+        "pages": {
+            "page": "http://nla.gov.au/nla.ms-ms1-s5r"
+        }
+        }, {
         "date": "1768-08-07",
         "filename": "17680807.html",
         "pages": {
