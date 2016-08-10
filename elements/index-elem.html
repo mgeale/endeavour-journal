@@ -10,16 +10,13 @@
 </dom-module>
 
 <script>
+var list;
   Polymer({
       is: "index-elem",
       dataset: function(r) {
           var response = r.detail.response;
-          var list = response.day;
-          var i;
-          for (i = 0; 1 < list.length; i++) {
-            console.log(i + ": " + list[i].coordinates);
-          }
-          // console.log(list.length);
+          list = response.day;
       }
   });
+
 </script>

@@ -2,7 +2,7 @@
   <template>
       <google-map map="{{map}}" disableDefaultUI fitToMarkers>
           <template is="dom-repeat" items="{{marker}}">
-              <google-map-marker map={{map}} latitude="{{item.latitudine}}" longitude="{{item.longitudine}}">
+              <google-map-marker map={{map}} latitude="{{item.coordinates.latitude}}" longitude="{{item.coordinates.longitude}}">
               </google-map-marker>
           </template>
       </google-map>
@@ -13,10 +13,7 @@
   Polymer({
       is: 'my-map',
       ready: function() {
-          this.marker = [
-              {latitudine: '41.223596', longitudine: '16.296087'},
-              {latitudine: '41.222450', longitudine: '16.291259'}
-          ];
+          this.marker = list;
       }
   });
 </script>
