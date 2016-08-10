@@ -23,28 +23,7 @@
     </template>
   </dom-module>
   
-  <dom-module id="my-map">
-    <template>
-      <google-map>
-        <template is="dom-repeat" items="{{locations}}" as="user">
-          <template is="dom-repeat" items="{{user.trace}}">
-            <google-map-marker latitude="{{item.latitude}}" longitude="{{item.longitude}}"></google-map-marker>
-          </template>
-        </template>
-      </google-map>
-    </template>
-  </dom-module>
+  <script src="scripts/scripts.js"></script>
   
-  <script>
-    Polymer({
-        is: "index-elem",
-        _on_response: function(r) {
-            response = r.detail.response;
-            list = response;
-            console.log(list);
-        }
-    });
-  </script>
-    
 </body>
 </html>
