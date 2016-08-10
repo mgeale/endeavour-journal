@@ -1,5 +1,11 @@
 Endeavour Journal
 
+App making use of journal entires by Captain James Cook onboard HMS Endeavour, 1769 to 1771.
+
+Built with Polymer
+
+Dataset provided download from National Library of Australia
+
 This dataset consists of 2 components:
 1. HTML pages containing the transcripts of the journals. Each filename refers to the date of the entry eg: 3rd Feb 1771 is 1770203.html
 2. endeavour-journal.xml contains the master list of dates, geographic coordinates (where applicable) and the associated digitised pages
