@@ -7,12 +7,44 @@
   <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 </head>
 <body>
-
-	<google-map></google-map>
+  <!-- Page elements -->
+  <google-map fit-to-markers></google-map>
   <index-elem></index-elem>
 
-
-  <link rel="import" href="elements.html">
-  <script src="scripts/scripts.js"></script>
+  <!-- Data Binding -->
+  <dom-module id="index-elem">
+    <template>
+      <iron-ajax
+        auto
+        url="endeavour-journal.json"
+        handle-as="json"
+        on-response="_on_response">
+      </iron-ajax>
+    </template>
+  </dom-module>
+  
+  <dom-module id="my-map">
+    <template>
+      <google-map>
+        <template is="dom-repeat" items="{{locations}}" as="user">
+          <template is="dom-repeat" items="{{user.trace}}">
+            <google-map-marker latitude="{{item.latitude}}" longitude="{{item.longitude}}"></google-map-marker>
+          </template>
+        </template>
+      </google-map>
+    </template>
+  </dom-module>
+  
+  <script>
+    Polymer({
+        is: "index-elem",
+        _on_response: function(r) {
+            response = r.detail.response;
+            list = response;
+            console.log(list);
+        }
+    });
+  </script>
+    
 </body>
 </html>
