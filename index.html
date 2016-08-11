@@ -11,16 +11,18 @@
 </head>
 <body>
 
-  <app-header>
+  <app-header effects="waterfall">
 	  <app-toolbar>
 	    <div main-title>Endeavour Journal</div>
 	  </app-toolbar>
 	</app-header>
 
   <index-elem></index-elem>
-  <div style="height:300px"></div>
-  <my-map></my-map>
-
+  
+  <div>
+    <my-map></my-map>
+    <div class="entries" id="entry"></div>
+  </div>
 
 </body>
 </html>

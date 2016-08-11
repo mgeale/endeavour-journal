@@ -1,5 +1,8 @@
 google-map {
-  height: 600px;
+  height: 400px;
+  width: 48%;
+  margin: 20px 10px;
+  float: left;
 }
 
 app-header {
@@ -9,8 +12,14 @@ app-header {
 	width: 100%;
 	height: 440px;
 	background-color: #FFF;
-/*	background-image: url(http://motherboard-images.vice.com/content-images/article/33254/1462394430232280.jpg?crop=1xw:0.8569948186528498xh;*,*&resize=1200:*&output-format=jpeg&output-quality=90);
+	background-image: url(http://motherboard-images.vice.com/content-images/article/33254/1462394430232280.jpg?crop=1xw:0.8569948186528498xh;*,*&resize=1200:*&output-format=jpeg&output-quality=90);
 	background-position: center center;
-	background-size: cover;*/
-	box-shadow: 2px 2px;
+	background-size: cover;
+}
+
+.entries {
+  height: 400px;
+  width: 48%;
+  float: left;
+  margin: 20px 10px;
 }
