@@ -22,4 +22,5 @@ app-header {
   width: 48%;
   float: left;
   margin: 20px 10px;
+  border: 1px solid black;
 }

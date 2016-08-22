@@ -1,6 +1,6 @@
 <dom-module id="my-map">
   <template>
-      <google-map map="{{map}}" disableDefaultUI fitToMarkers>
+      <google-map map="{{map}}" latitude="50.351557" longitude="-4.146181" fitToMarkers mapType="satellite">
           <template is="dom-repeat" items="{{marker}}">
               <google-map-marker map={{map}} latitude="{{item.coordinates.latitude}}" longitude="{{item.coordinates.longitude}}">
               </google-map-marker>
