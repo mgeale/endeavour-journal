@@ -1,20 +1,20 @@
 <dom-module id="my-map">
   <template>
-      <google-map map="{{map}}" latitude="50.351557" longitude="-4.146181" fitToMarkers mapType="satellite">
+      <google-map api-key="AIzaSyB0a_VCfYtnevVSlcm3CWUL3PkAt5W6VKA" map="{{map}}" latitude="50.351557" longitude="-4.146181" fitToMarkers map-type="satellite">
           <template is="dom-repeat" items="{{marker}}">
               <google-map-marker map={{map}} latitude="{{item.coordinates.latitude}}" longitude="{{item.coordinates.longitude}}">
               </google-map-marker>
           </template>
       </google-map>
   </template>
+
+  <script>
+    Polymer({
+        is: 'my-map',
+        ready: function() {
+            this.marker = list;
+        }
+    });
+
+  </script>
 </dom-module>
-
-<script>
-  Polymer({
-      is: 'my-map',
-      ready: function() {
-          this.marker = list;
-      }
-  });
-
-</script>

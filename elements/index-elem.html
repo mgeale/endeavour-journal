@@ -7,15 +7,15 @@
       on-response="dataset">
     </iron-ajax>
   </template>
-</dom-module>
 
-<script>
-  var list;
-  Polymer({
-      is: "index-elem",
-      dataset: function(r) {
-          var response = r.detail.response;
-          list = response.day;
-      }
-  });
-</script>
+  <script>
+    var list;
+    Polymer({
+        is: "index-elem",
+        dataset: function(r) {
+            var response = r.detail.response;
+            list = response.day;
+        }
+    });
+  </script>
+</dom-module>
