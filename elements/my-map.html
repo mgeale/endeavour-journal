@@ -1,6 +1,6 @@
 <dom-module id="my-map">
   <template>
-      <google-map api-key="AIzaSyB0a_VCfYtnevVSlcm3CWUL3PkAt5W6VKA" map="{{map}}" latitude="50.351557" longitude="-4.146181" fitToMarkers map-type="satellite">
+      <google-map api-key="AIzaSyB0a_VCfYtnevVSlcm3CWUL3PkAt5W6VKA" map="{{map}}" zoom="6" latitude="50.351557" longitude="-4.146181" fitToMarkers map-type="satellite">
           <template is="dom-repeat" items="{{marker}}">
               <google-map-marker map={{map}} latitude="{{item.coordinates.latitude}}" longitude="{{item.coordinates.longitude}}">
               </google-map-marker>
