@@ -7,23 +7,15 @@
   <!-- <link rel="import" href="bower_components/app-layout/app-layout.html"> -->
   <link rel="import" href="bower_components/firebase-element/firebase.html">
   <link rel="import" href="elements/my-map.html">
-
+  <link rel="import" href="elements/fire-elem.html">
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 </head>
 <body>
 
-  <firebase-app auth-domain="endeavourjournal.firebaseapp.com"
-    database-url="https://endeavourjournal.firebaseio.com"
-    api-key="AIzaSyAcMKkHkVFFHFT9fEunuwap_5C6FOK7VCg">
-  </firebase-app>
-
-  <firebase-document
-    path="/journal/"
-    data="day">
-  </firebase-document>
-
-
   <my-map></my-map>
   <div class="entries" id="entry"></div>
+
+  <fire-elem></fire-elem>
 
 </body>
 </html>

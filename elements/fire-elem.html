@@ -1,0 +1,24 @@
+<dom-module id="fire-elem">
+  <template>
+    <firebase-app auth-domain="endeavourjournal.firebaseapp.com"
+      database-url="https://endeavourjournal.firebaseio.com"
+      api-key="AIzaSyAcMKkHkVFFHFT9fEunuwap_5C6FOK7VCg">
+    </firebase-app>
+
+    <firebase-document
+      path="/"
+      data="{{list}}">
+    </firebase-document>
+
+    {{list}}
+    Hello
+
+  </template>
+
+  <script>
+    var list;
+    Polymer({
+        is: "fire-elem",
+    });
+  </script>
+</dom-module>
