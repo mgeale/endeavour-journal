@@ -5,22 +5,8 @@ google-map {
   float: left;
 }
 
-app-header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 440px;
-	background-color: #FFF;
-	background-image: url(http://motherboard-images.vice.com/content-images/article/33254/1462394430232280.jpg?crop=1xw:0.8569948186528498xh;*,*&resize=1200:*&output-format=jpeg&output-quality=90);
-	background-position: center center;
-	background-size: cover;
-}
-
-.entries {
-  height: 400px;
-  width: 48%;
-  float: left;
-  margin: 20px 10px;
-  border: 1px solid black;
+.background {
+  background-image: url('../images/1462394430232280.jpg');
+  background-size: cover;
+  background-position: center;
 }
