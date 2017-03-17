@@ -1,12 +1,12 @@
 google-map {
   height: 400px;
-  width: 48%;
+  width: 80%;
   margin: 20px 10px;
-  float: left;
 }
 
 .background {
-  background-image: url('../images/1462394430232280.jpg');
+  /*background-image: url('../images/1462394430232280.jpg');*/
   background-size: cover;
-  background-position: center;
+  background-position: left;
+  height: 80vh;
 }
