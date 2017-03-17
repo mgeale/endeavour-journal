@@ -1,0 +1,25 @@
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="journey-data">
+  <template>
+
+    <iron-ajax
+      auto
+      url="../../data/endeavour-journal.json"
+      handle-as="json"
+      last-response="{{response}}">
+    </iron-ajax>
+
+    <template is="dom-repeat" items="{{response}}">
+      <div>
+        {{item.date}}
+      </div>
+    </template>
+
+  </template>
+  <script>
+
+  Polymer({});
+
+  </script>
+</dom-module>
