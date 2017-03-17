@@ -10,12 +10,6 @@
       last-response="{{response}}">
     </iron-ajax>
 
-    <template is="dom-repeat" items="{{response}}">
-      <div>
-        {{item.date}}, {{item.coordinates.latitude}}, {{item.coordinates.longitude}}
-      </div>
-    </template>
-
   </template>
 
   <script>
