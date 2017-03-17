@@ -1,7 +1,10 @@
 <link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/iron-signals/iron-signals.html">
 
 <dom-module id="journey-map">
   <template>
+
+    <iron-signals on-iron-signal-mysignal="_listenFunc"></iron-signals>
 
     <google-map
       map="{{map}}"
@@ -11,12 +14,31 @@
       map-type="satellite"
       fitToMarkers
       api-key="AIzaSyB0a_VCfYtnevVSlcm3CWUL3PkAt5W6VKA">
+      <template is="dom-repeat" items="{{fleets}}" as="fleet">
+        <google-map-marker
+          latitude="{{fleet.coordinates.latitude}}"
+          longitude="{{fleet.coordinates.longitude}}">
+        </google-map-marker>
+      </template>
     </google-map>
 
   </template>
   <script>
 
-  Polymer({});
+  Polymer({
+    is: 'journey-map',
+
+    properties: {
+      fleets: {
+        type: Object
+      }
+    },
+
+    _listenFunc: function(e) {
+      this.fleets = e.detail;
+      console.log(e.detail);
+    }
+  });
 
   </script>
 </dom-module>

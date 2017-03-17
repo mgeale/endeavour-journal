@@ -16,11 +16,10 @@
 
   Polymer({
     is: "journey-data",
+
     handleResponse: function(e) {
-      console.log(e.detail.response);
-    },
-    properties: {
-      
+      // console.log(e.detail.response);
+      this.fire('iron-signal', {name: 'mysignal', data: e.detail.response});
     }
   });
 
