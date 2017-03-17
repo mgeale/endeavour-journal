@@ -2,24 +2,30 @@
 
 <dom-module id="journey-data">
   <template>
-
+    <h2>Hello</h2>
     <iron-ajax
       auto
       url="../../data/endeavour-journal.json"
       handle-as="json"
+      on-response="handleResponse"
       last-response="{{response}}">
     </iron-ajax>
 
-    <template is="dom-repeat" items="{{response}}">
+    <dom-repeat items="{{response}}">
       <div>
         {{item.date}}
       </div>
-    </template>
+    </dom-repeat>
 
   </template>
   <script>
 
-  Polymer({});
+  Polymer({
+    is: "journey-data",
+    handleResponse: function(e) {
+      console.log(e.detail.response);
+    }
+  });
 
   </script>
 </dom-module>
