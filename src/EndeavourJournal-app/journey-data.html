@@ -2,7 +2,6 @@
 
 <dom-module id="journey-data">
   <template>
-    <h2>Hello</h2>
     <iron-ajax
       auto
       url="../../data/endeavour-journal.json"
@@ -11,13 +10,14 @@
       last-response="{{response}}">
     </iron-ajax>
 
-    <dom-repeat items="{{response}}">
+    <template is="dom-repeat" items="{{response}}">
       <div>
-        {{item.date}}
+        {{item.date}}, {{item.coordinates.latitude}}, {{item.coordinates.longitude}}
       </div>
-    </dom-repeat>
+    </template>
 
   </template>
+
   <script>
 
   Polymer({
