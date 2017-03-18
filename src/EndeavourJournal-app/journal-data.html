@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
-<dom-module id="journey-data">
+<dom-module id="journal-data">
   <template>
     <iron-ajax
       auto
@@ -15,7 +15,7 @@
   <script>
 
   Polymer({
-    is: "journey-data",
+    is: "journal-data",
 
     handleResponse: function(e) {
       this.fire('iron-signal', {name: 'loaded-data', data: e.detail.response});

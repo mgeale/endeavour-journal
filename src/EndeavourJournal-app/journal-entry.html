@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="journal-entry">
+  <template>
+
+    <iron-signals on-iron-signal-clicked-data="listenJournalEntry"></iron-signals>
+
+  </template>
+
+  <script>
+
+  Polymer({
+    is: "journal-entry",
+
+    properties: {
+      entry: {
+        type: String
+      }
+    },
+
+    listenJournalEntry: function(e) {
+      console.log(e.detail.filename);
+      this.entry = e.detail.filename;
+    }
+  });
+
+  </script>
+</dom-module>
