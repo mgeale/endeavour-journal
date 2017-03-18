@@ -18,8 +18,7 @@
     is: "journey-data",
 
     handleResponse: function(e) {
-      // console.log(e.detail.response);
-      this.fire('iron-signal', {name: 'mysignal', data: e.detail.response});
+      this.fire('iron-signal', {name: 'loaded-data', data: e.detail.response});
     }
   });
 

@@ -4,20 +4,22 @@
 <dom-module id="journey-map">
   <template>
 
-    <iron-signals on-iron-signal-mysignal="_listenFunc"></iron-signals>
+    <iron-signals on-iron-signal-loaded-data="listenJourneyData"></iron-signals>
 
     <google-map
       map="{{map}}"
-      zoom="6"
+      zoom="5"
       latitude="50.351557"
       longitude="-4.146181"
       map-type="satellite"
       fitToMarkers
       api-key="AIzaSyB0a_VCfYtnevVSlcm3CWUL3PkAt5W6VKA">
-      <template is="dom-repeat" items="{{fleets}}" as="fleet">
+      <template is="dom-repeat" items="{{dates}}" as="date">
         <google-map-marker
-          latitude="{{fleet.coordinates.latitude}}"
-          longitude="{{fleet.coordinates.longitude}}">
+          latitude="{{date.coordinates.latitude}}"
+          longitude="{{date.coordinates.longitude}}"
+          click-events="true"
+          on-google-map-marker-click="clickMarker">
         </google-map-marker>
       </template>
     </google-map>
@@ -29,14 +31,18 @@
     is: 'journey-map',
 
     properties: {
-      fleets: {
+      dates: {
         type: Object
       }
     },
 
-    _listenFunc: function(e) {
-      this.fleets = e.detail;
-      console.log(e.detail);
+    listenJourneyData: function(e) {
+      this.dates = e.detail;
+    },
+
+    clickMarker: function(e) {
+      // console.log(e.model.__data__.date.date);
+      this.fire('iron-signal', {name: 'clicked-data', data: e.model.__data__.date});
     }
   });
 
