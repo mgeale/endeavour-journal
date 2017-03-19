@@ -1,10 +1,10 @@
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="journal-data">
   <template>
     <iron-ajax
       auto
-      url="../../data/endeavour-journal.json"
+      url="../data/endeavour-journal.json"
       handle-as="json"
       on-response="handleResponse"
       last-response="{{response}}">

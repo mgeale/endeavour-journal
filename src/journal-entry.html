@@ -1,11 +1,13 @@
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="journal-entry">
   <template>
 
     <iron-signals on-iron-signal-clicked-data="listenJournalEntry"></iron-signals>
 
-    <div id="content"></div>
+    <div id="content">
+      <button id="child" on-click="closeJournalEntry">close</button>
+    </div>
 
   </template>
 
@@ -23,9 +25,8 @@
 
     listenJournalEntry: function(e) {
       this.entry = e.detail.filename;
-      var link = this.importHref('../../data/journal-pages/' + this.entry, function() {
-        Polymer.dom(this.root).querySelector('#content').appendChild(link.import.body);
-        console.log(link.import.body);
+      var link = this.importHref('../data/journal-pages/' + this.entry, function() {
+        this.$$('#content').appendChild(link.import.body);
       });
     }
 
