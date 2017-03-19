@@ -5,7 +5,7 @@
 
     <iron-signals on-iron-signal-clicked-data="listenJournalEntry"></iron-signals>
 
-    <a href="../../data/journal-pages/{{entry}}" target="_blank">click</a>
+    <div id="content"></div>
 
   </template>
 
@@ -17,13 +17,18 @@
     properties: {
       entry: {
         type: String
-      }
+      },
+
     },
 
     listenJournalEntry: function(e) {
-      console.log(e.detail.filename);
       this.entry = e.detail.filename;
+      var link = this.importHref('../../data/journal-pages/' + this.entry, function() {
+        Polymer.dom(this.root).querySelector('#content').appendChild(link.import.body);
+        console.log(link.import.body);
+      });
     }
+
   });
 
   </script>
