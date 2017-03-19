@@ -4,10 +4,7 @@
   <template>
 
     <iron-signals on-iron-signal-clicked-data="listenJournalEntry"></iron-signals>
-
-    <div id="content">
-      <button id="child" on-click="closeJournalEntry">close</button>
-    </div>
+    <div id="content"></div>
 
   </template>
 
@@ -24,9 +21,12 @@
     },
 
     listenJournalEntry: function(e) {
+      var item = this.$$('#content');
+      console.log(item);
+      // item.parentNode.removeChild(item);
       this.entry = e.detail.filename;
       var link = this.importHref('../data/journal-pages/' + this.entry, function() {
-        this.$$('#content').appendChild(link.import.body);
+        item.appendChild(link.import.body);
       });
     }
 
