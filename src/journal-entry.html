@@ -26,9 +26,7 @@
       var item = this.$$('#content');
       this.entry = e.detail.filename;
       var link = this.importHref('../data/journal-pages/' + this.entry, function() {
-        item.replaceWith(link.import.body);
-        console.log(link.import.body);
-        // item.innerHTML = link.import.body;
+        item.innerHTML = link.import.body.innerHTML;
       });
     }
 
