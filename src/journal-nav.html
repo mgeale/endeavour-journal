@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/google-map/google-map.html">
 <link rel="import" href="../bower_components/iron-signals/iron-signals.html">
 
-<dom-module id="journal-map">
+<dom-module id="journal-nav">
   <template>
 
     <iron-signals on-iron-signal-loaded-data="listenJournalData"></iron-signals>
@@ -24,11 +24,13 @@
       </template>
     </google-map>
 
+    <button>Prev</button><button on-click="clickNext">Next</button>
+
   </template>
   <script>
 
   Polymer({
-    is: 'journal-map',
+    is: 'journal-nav',
 
     properties: {
       dates: {
@@ -40,9 +42,14 @@
       this.dates = e.detail;
     },
 
+    clickNext: function() {
+      console.log(this.dates[0]);
+      this.fire('iron-signal', {name: 'clicked-next', data: this.dates[0]});
+    },
+
     clickMarker: function(e) {
       console.log(e.model.__data__.date.date);
-      this.fire('iron-signal', {name: 'clicked-data', data: e.model.__data__.date});
+      this.fire('iron-signal', {name: 'clicked-marker', data: e.model.__data__.date});
     }
   });
 

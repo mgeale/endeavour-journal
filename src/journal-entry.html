@@ -3,7 +3,8 @@
 <dom-module id="journal-entry">
   <template>
 
-    <iron-signals on-iron-signal-clicked-data="listenJournalEntry"></iron-signals>
+    <iron-signals on-iron-signal-clicked-marker="listenJournalEntry"></iron-signals>
+    <iron-signals on-iron-signal-clicked-next="listenJournalEntry"></iron-signals>
     <div id="content">
 
     </div>
@@ -21,6 +22,8 @@
       },
 
     },
+
+
 
     listenJournalEntry: function(e) {
       var item = this.$$('#content');

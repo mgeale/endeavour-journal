@@ -4,9 +4,11 @@ google-map {
   margin: 20px 10px;
 }
 
-.background {
-  background-image: url('../images/1462394430232280.jpg');
-  background-size: cover;
-  background-position: left;
-  height: 80vh;
+table {
+  /*font-family: 'Allura', cursive;*/
+  font-size: 20px;
+}
+
+tbody tr td br {
+  display: none;
 }
