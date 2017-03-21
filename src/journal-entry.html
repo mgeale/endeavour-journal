@@ -3,8 +3,7 @@
 <dom-module id="journal-entry">
   <template>
 
-    <iron-signals on-iron-signal-clicked-marker="listenJournalEntry"></iron-signals>
-    <iron-signals on-iron-signal-clicked-next="listenJournalEntry"></iron-signals>
+    <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
     <div id="content">
 
     </div>
@@ -17,13 +16,12 @@
     is: "journal-entry",
 
     properties: {
+
       entry: {
         type: String
-      },
+      }
 
     },
-
-
 
     listenJournalEntry: function(e) {
       var item = this.$$('#content');

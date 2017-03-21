@@ -24,7 +24,8 @@
       </template>
     </google-map>
 
-    <button>Prev</button><button on-click="clickNext">Next</button>
+    <button on-click="clickPrev">Prev</button><button on-click="clickNext">Next</button>
+    <h2> Entry: {{index}} <br>Date: </h2>
 
   </template>
   <script>
@@ -33,6 +34,12 @@
     is: 'journal-nav',
 
     properties: {
+
+      index: {
+        type: Number,
+        value: 0
+      },
+
       dates: {
         type: Object
       }
@@ -42,15 +49,33 @@
       this.dates = e.detail;
     },
 
-    clickNext: function() {
-      console.log(this.dates[0]);
-      this.fire('iron-signal', {name: 'clicked-next', data: this.dates[0]});
+    clickNext: function(e) {
+      if (this.index < this.dates.length) {
+        // this.loadEntry(this.dates[this.index]);
+        // console.log(this.dates[this.index]);
+        console.log(e);
+        this.index++;
+      };
+    },
+
+    clickPrev: function() {
+      if (this.index < this.dates.length) {
+        // this.loadEntry(this.dates[this.index]);
+        this.index--;
+      };
+
     },
 
     clickMarker: function(e) {
-      console.log(e.model.__data__.date.date);
-      this.fire('iron-signal', {name: 'clicked-marker', data: e.model.__data__.date});
+      this.loadEntry(e.model.__data__);
+      console.log(e.model.__data__);
+    },
+
+    loadEntry: function(obj) {
+      this.fire('iron-signal', {name: 'send-data', data: obj.date});
+      this.index = obj.index;
     }
+
   });
 
   </script>
