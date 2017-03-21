@@ -25,7 +25,7 @@
     </google-map>
 
     <button on-click="clickPrev">Prev</button><button on-click="clickNext">Next</button>
-    <h2> Entry: {{index}} <br>Date: </h2>
+    <h2> Entry: {{index}} <br>Date: {{dateObj}}</h2>
 
   </template>
   <script>
@@ -42,6 +42,10 @@
 
       dates: {
         type: Object
+      },
+
+      dateObj: {
+        type: String
       }
     },
 
@@ -51,29 +55,29 @@
 
     clickNext: function(e) {
       if (this.index < this.dates.length) {
-        // this.loadEntry(this.dates[this.index]);
-        // console.log(this.dates[this.index]);
-        console.log(e);
+        this.loadEntry(this.dates[this.index]);
+        this.dateObj = this.dates[this.index].date;
         this.index++;
       };
     },
 
     clickPrev: function() {
       if (this.index < this.dates.length) {
-        // this.loadEntry(this.dates[this.index]);
         this.index--;
+        this.loadEntry(this.dates[this.index]);
+        this.dateObj = this.dates[this.index].date;
       };
 
     },
 
     clickMarker: function(e) {
-      this.loadEntry(e.model.__data__);
-      console.log(e.model.__data__);
+      this.loadEntry(e.model.__data__.date);
+      this.index = e.model.__data__.index;
+      this.dateObj = e.model.__data__.date.date;
     },
 
     loadEntry: function(obj) {
-      this.fire('iron-signal', {name: 'send-data', data: obj.date});
-      this.index = obj.index;
+      this.fire('iron-signal', {name: 'send-data', data: obj});
     }
 
   });
