@@ -5341,6 +5341,10 @@
     "filename": "17700822.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s286v", "http://nla.gov.au/nla.ms-ms1-s287r", "http://nla.gov.au/nla.ms-ms1-s287v", "http://nla.gov.au/nla.ms-ms1-s288r", "http://nla.gov.au/nla.ms-ms1-s288v"]
+    },
+    "coordinates": {
+        "latitude": "-10.705348,",
+        "longitude": "142.401652"
     }
 }, {
     "date": "1770-08-23",
