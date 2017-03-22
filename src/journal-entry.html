@@ -26,8 +26,8 @@
     listenJournalEntry: function(e) {
       var item = this.$$('#content');
       this.entry = e.detail.filename;
-      var link = this.importHref('../data/journal-pages/' + this.entry, function() {
-        item.innerHTML = link.import.body.innerHTML;
+      this.importHref('../data/journal-pages/' + this.entry, function(e) {
+        item.innerHTML = e.path[0].import.body.innerHTML;
       });
     }
 

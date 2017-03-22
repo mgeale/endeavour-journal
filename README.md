@@ -1,1 +1,1 @@
-# \<EndeavourJournal\>
+# EndeavourJournal
