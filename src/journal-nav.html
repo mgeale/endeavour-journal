@@ -4,7 +4,7 @@
 <dom-module id="journal-nav">
   <template>
 
-    <iron-signals on-iron-signal-loaded-data="listenJournalData"></iron-signals>
+    <iron-signals on-iron-signal-load-data="listenJournalData"></iron-signals>
 
     <google-map
       map="{{map}}"
@@ -14,10 +14,10 @@
       map-type="satellite"
       fitToMarkers
       api-key="AIzaSyB0a_VCfYtnevVSlcm3CWUL3PkAt5W6VKA">
-      <template is="dom-repeat" items="{{dates}}" as="date">
+      <template is="dom-repeat" items="{{entries}}" as="entry">
         <google-map-marker
-          latitude="{{date.coordinates.latitude}}"
-          longitude="{{date.coordinates.longitude}}"
+          latitude="{{entry.coordinates.latitude}}"
+          longitude="{{entry.coordinates.longitude}}"
           click-events="true"
           on-google-map-marker-click="clickMarker">
         </google-map-marker>
@@ -25,7 +25,7 @@
     </google-map>
 
     <button on-click="clickPrev">Prev</button><button on-click="clickNext">Next</button>
-    <h2> Entry: {{index}} <br>Date: {{dateObj}}</h2>
+    <h2>Date: {{dateObj}}</h2>
 
   </template>
   <script>
@@ -40,7 +40,7 @@
         value: 0
       },
 
-      dates: {
+      entries: {
         type: Object
       },
 
@@ -50,34 +50,37 @@
     },
 
     listenJournalData: function(e) {
-      this.dates = e.detail;
+      this.entries = e.detail;
+      this.loadEntry(this.entries[this.index]);
+      this.dateObj = this.entries[this.index].date;
     },
 
-    clickNext: function(e) {
-      if (this.index < this.dates.length) {
-        this.loadEntry(this.dates[this.index]);
-        this.dateObj = this.dates[this.index].date;
+    clickNext: function() {
+      if (this.index < this.entries.length) {
         this.index++;
+        this.loadEntry(this.entries[this.index]);
+        this.dateObj = this.entries[this.index].date;
       };
     },
 
     clickPrev: function() {
-      if (this.index < this.dates.length) {
+      if (this.index < this.entries.length) {
         this.index--;
-        this.loadEntry(this.dates[this.index]);
-        this.dateObj = this.dates[this.index].date;
+        this.loadEntry(this.entries[this.index]);
+        this.dateObj = this.entries[this.index].date;
       };
-
     },
 
     clickMarker: function(e) {
-      this.loadEntry(e.model.__data__.date);
-      this.index = e.model.__data__.index;
-      this.dateObj = e.model.__data__.date.date;
+      var mapClick = e.model.__data__;
+      this.index = mapClick.index;
+      this.loadEntry(mapClick.entry);
+      this.dateObj = mapClick.entry.date;
     },
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
+      console.log(this.index);
     }
 
   });

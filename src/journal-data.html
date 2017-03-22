@@ -18,7 +18,7 @@
     is: "journal-data",
 
     handleResponse: function(e) {
-      this.fire('iron-signal', {name: 'loaded-data', data: e.detail.response});
+      this.fire('iron-signal', {name: 'load-data', data: e.detail.response});
     }
   });
 
