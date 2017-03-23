@@ -4469,6 +4469,10 @@
     "filename": "17700331.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s204v", "http://nla.gov.au/nla.ms-ms1-s205r", "http://nla.gov.au/nla.ms-ms1-s205v", "http://nla.gov.au/nla.ms-ms1-s206r", "http://nla.gov.au/nla.ms-ms1-s206v", "http://nla.gov.au/nla.ms-ms1-s207r", "http://nla.gov.au/nla.ms-ms1-s207v", "http://nla.gov.au/nla.ms-ms1-s208r", "http://nla.gov.au/nla.ms-ms1-s208v", "http://nla.gov.au/nla.ms-ms1-s209r", "http://nla.gov.au/nla.ms-ms1-s209v", "http://nla.gov.au/nla.ms-ms1-s210r", "http://nla.gov.au/nla.ms-ms1-s210v", "http://nla.gov.au/nla.ms-ms1-s211r", "http://nla.gov.au/nla.ms-ms1-s211v", "http://nla.gov.au/nla.ms-ms1-s212r", "http://nla.gov.au/nla.ms-ms1-s212v", "http://nla.gov.au/nla.ms-ms1-s213r", "http://nla.gov.au/nla.ms-ms1-s213v", "http://nla.gov.au/nla.ms-ms1-s214r", "http://nla.gov.au/nla.ms-ms1-s214v", "http://nla.gov.au/nla.ms-ms1-s215r", "http://nla.gov.au/nla.ms-ms1-s215v", "http://nla.gov.au/nla.ms-ms1-s216r", "http://nla.gov.au/nla.ms-ms1-s216v", "http://nla.gov.au/nla.ms-ms1-s217r", "http://nla.gov.au/nla.ms-ms1-s217v", "http://nla.gov.au/nla.ms-ms1-s218r", "http://nla.gov.au/nla.ms-ms1-s218v", "http://nla.gov.au/nla.ms-ms1-s219r", "http://nla.gov.au/nla.ms-ms1-s219v", "http://nla.gov.au/nla.ms-ms1-s220r", "http://nla.gov.au/nla.ms-ms1-s220v"]
+    },
+    "coordinates": {
+        "latitude": "-40.226611",
+        "longitude": "172.745960"
     }
 }, {
     "date": "1770-04-01",
@@ -4589,6 +4593,10 @@
     "filename": "17700420.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s224r"
+    },
+    "coordinates": {
+        "latitude": "-37.506195",
+        "longitude": "149.980028"
     }
 }, {
     "date": "1770-04-21",
@@ -4893,18 +4901,30 @@
     "filename": "17700609.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s253r", "http://nla.gov.au/nla.ms-ms1-s253v"]
+    },
+    "coordinates": {
+        "latitude": "-16.854176",
+        "longitude": "145.933999"
     }
 }, {
     "date": "1770-06-10",
     "filename": "17700610.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s253v", "http://nla.gov.au/nla.ms-ms1-s254r", "http://nla.gov.au/nla.ms-ms1-s254v"]
+    },
+    "coordinates": {
+        "latitude": "-16.407077",
+        "longitude": "145.532499"
     }
 }, {
     "date": "1770-06-11",
     "filename": "17700611.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s254v", "http://nla.gov.au/nla.ms-ms1-s255r", "http://nla.gov.au/nla.ms-ms1-s255v"]
+    },
+    "coordinates": {
+        "latitude": "-15.783105",
+        "longitude": "145.532424"
     }
 }, {
     "date": "1770-06-12",
@@ -4923,6 +4943,10 @@
     "filename": "17700614.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s257r", "http://nla.gov.au/nla.ms-ms1-s257v"]
+    },
+    "coordinates": {
+        "latitude": "-15.533511",
+        "longitude": "145.396806"
     }
 }, {
     "date": "1770-06-15",
