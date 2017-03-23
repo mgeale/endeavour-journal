@@ -8,7 +8,7 @@
 
     <google-map
       map="{{map}}"
-      zoom="5"
+      zoom="6"
       latitude="50.351557"
       longitude="-4.146181"
       map-type="satellite"
@@ -46,28 +46,34 @@
 
       dateObj: {
         type: String
+      },
+
+      positionRule: {
+        type: Boolean,
+        value: 'this.index < this.entries.length',
+        readyOnly: true
       }
     },
 
     listenJournalData: function(e) {
       this.entries = e.detail;
       this.loadEntry(this.entries[this.index]);
-      this.dateObj = this.entries[this.index].date;
+      this.loadData(this.entries[this.index]);
     },
 
     clickNext: function() {
-      if (this.index < this.entries.length) {
+      if (this.positionRule) {
         this.index++;
         this.loadEntry(this.entries[this.index]);
-        this.dateObj = this.entries[this.index].date;
+        this.loadData(this.entries[this.index]);
       };
     },
 
     clickPrev: function() {
-      if (this.index < this.entries.length) {
+      if (this.positionRule) {
         this.index--;
         this.loadEntry(this.entries[this.index]);
-        this.dateObj = this.entries[this.index].date;
+        this.loadData(this.entries[this.index]);
       };
     },
 
@@ -75,12 +81,17 @@
       var mapClick = e.model.__data__;
       this.index = mapClick.index;
       this.loadEntry(mapClick.entry);
-      this.dateObj = mapClick.entry.date;
+      this.loadData(mapClick.entry);
     },
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
       console.log(this.index);
+    },
+
+    loadData: function(data) {
+      console.log(data);
+      this.dateObj = data.date;
     }
 
   });
