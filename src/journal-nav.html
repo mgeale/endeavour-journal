@@ -25,7 +25,7 @@
     </google-map>
 
     <button on-click="clickPrev">Prev</button><button on-click="clickNext">Next</button>
-    <h2>Date: {{dateObj}}<br>Day: {{days}}<br>Distance travelled: </h2>
+    <h2>Date: {{date}}<br>Day: {{days}}<br>Distance travelled: </h2>
 
   </template>
   <script>
@@ -44,36 +44,27 @@
         type: Object
       },
 
-      dateObj: {
+      date: {
         type: String
       },
 
       days: {
         type: String
-      },
-
-      positionRule: {
-        type: Boolean,
-        value: 'this.index < 1048',
-        readyOnly: true
       }
     },
 
     listenJournalData: function(e) {
       this.entries = e.detail;
       this.loadEntry(this.entries[this.index]);
-      this.loadData(this.entries[this.index]);
     },
 
     clickNext: function() {
       if (this.index < 1049) {
         this.index++;
         this.loadEntry(this.entries[this.index]);
-        this.loadData(this.entries[this.index]);
       } else {
         this.index = 0;
         this.loadEntry(this.entries[this.index]);
-        this.loadData(this.entries[this.index]);
       };
     },
 
@@ -81,11 +72,9 @@
       if ((this.index > 0) && (this.index <= 1049)) {
         this.index--;
         this.loadEntry(this.entries[this.index]);
-        this.loadData(this.entries[this.index]);
       } else {
         this.index = 1049;
         this.loadEntry(this.entries[this.index]);
-        this.loadData(this.entries[this.index]);
       };
     },
 
@@ -93,23 +82,22 @@
       var mapClick = e.model.__data__;
       this.index = mapClick.index;
       this.loadEntry(mapClick.entry);
-      this.loadData(mapClick.entry);
     },
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
+      this.date = obj.date;
+      var startDate = new Date(1768,07,28);
+      var splitDate = obj.date.split("-");
+      var entryDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
+      this.days = this.calDays(startDate, entryDate);
       console.log(this.index);
+      console.log(obj);
     },
 
-    loadData: function(data) {
-      console.log(data);
-      this.dateObj = data.date;
-      var splitDate = data.date.split("-");
+    calDays: function(startDate, entryDate) {
       var oneDay = 24*60*60*1000;
-      var startDate = new Date(1768,07,28);
-      var todayDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
-      var diffDays = Math.round(Math.abs((startDate.getTime() - todayDate.getTime())/(oneDay)));
-      this.days = diffDays;
+      return Math.round(Math.abs((startDate.getTime() - entryDate.getTime())/(oneDay)));
     }
 
   });
