@@ -12,3 +12,7 @@ table {
 tbody tr td br {
   display: none;
 }
+
+tbody tr td table {
+  display: none;
+}

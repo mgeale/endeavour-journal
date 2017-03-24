@@ -25,7 +25,7 @@
     </google-map>
 
     <button on-click="clickPrev">Prev</button><button on-click="clickNext">Next</button>
-    <h2>Date: {{dateObj}}<br>Day: <br>Distance travelled: </h2>
+    <h2>Date: {{dateObj}}<br>Day: {{days}}<br>Distance travelled: </h2>
 
   </template>
   <script>
@@ -37,7 +37,7 @@
 
       index: {
         type: Number,
-        value: 1043
+        value: 0
       },
 
       entries: {
@@ -45,6 +45,10 @@
       },
 
       dateObj: {
+        type: String
+      },
+
+      days: {
         type: String
       },
 
@@ -74,7 +78,7 @@
     },
 
     clickPrev: function() {
-      if ((this.index > 0) && (this.index < 1049)) {
+      if ((this.index > 0) && (this.index <= 1049)) {
         this.index--;
         this.loadEntry(this.entries[this.index]);
         this.loadData(this.entries[this.index]);
@@ -100,6 +104,12 @@
     loadData: function(data) {
       console.log(data);
       this.dateObj = data.date;
+      var splitDate = data.date.split("-");
+      var oneDay = 24*60*60*1000;
+      var startDate = new Date(1768,07,28);
+      var todayDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
+      var diffDays = Math.round(Math.abs((startDate.getTime() - todayDate.getTime())/(oneDay)));
+      this.days = diffDays;
     }
 
   });
