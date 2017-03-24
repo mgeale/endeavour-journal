@@ -37,7 +37,7 @@
 
       index: {
         type: Number,
-        value: 0
+        value: 1043
       },
 
       entries: {
@@ -50,7 +50,7 @@
 
       positionRule: {
         type: Boolean,
-        value: 'this.index < this.entries.length',
+        value: 'this.index < 1048',
         readyOnly: true
       }
     },
@@ -62,16 +62,24 @@
     },
 
     clickNext: function() {
-      if (this.positionRule) {
+      if (this.index < 1049) {
         this.index++;
+        this.loadEntry(this.entries[this.index]);
+        this.loadData(this.entries[this.index]);
+      } else {
+        this.index = 0;
         this.loadEntry(this.entries[this.index]);
         this.loadData(this.entries[this.index]);
       };
     },
 
     clickPrev: function() {
-      if (this.positionRule) {
+      if ((this.index > 0) && (this.index < 1049)) {
         this.index--;
+        this.loadEntry(this.entries[this.index]);
+        this.loadData(this.entries[this.index]);
+      } else {
+        this.index = 1049;
         this.loadEntry(this.entries[this.index]);
         this.loadData(this.entries[this.index]);
       };
