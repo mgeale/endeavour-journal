@@ -1,7 +1,6 @@
 <link rel="import" href="../bower_components/google-map/google-map.html">
 <link rel="import" href="../bower_components/iron-signals/iron-signals.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="journal-entry.html">
 
 <dom-module id="journal-nav">
@@ -11,11 +10,11 @@
 
     <google-map
       map="{{map}}"
-      zoom="4"
-      latitude="50.351557"
-      longitude="-4.146181"
+      zoom="3"
+      latitude="-32.537951"
+      longitude="172.497693"
       map-type="satellite"
-      fitToMarkers
+      disable-default-ui="true"
       api-key="AIzaSyCEowUZnnaTudIOq3XYaQLgVD0lOr-Bn1A">
       <template is="dom-repeat" items="{{entries}}" as="entry">
         <google-map-marker
@@ -28,8 +27,8 @@
     </google-map>
 
     <div style="display:flex; justify-content:space-between;">
-      <iron-icon icon="icons:chevron-left" on-click="clickPrev"></iron-icon>
-      <iron-icon icon="icons:chevron-right" on-click="clickNext"></iron-icon>
+      <paper-button on-click="clickPrev">Prev</paper-button>
+      <paper-button on-click="clickNext">Next</paper-button>
     </div>
 
     <journal-entry></journal-entry>
@@ -44,7 +43,7 @@
 
       index: {
         type: Number,
-        value: 0
+        value: 606
       },
 
       entries: {
