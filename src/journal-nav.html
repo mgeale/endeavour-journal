@@ -61,6 +61,7 @@
       if (this.index < 1049) {
         this.index++;
         this.loadEntry(this.entries[this.index]);
+        this.jumpMarker(this.index);
       } else {
         this.index = 0;
         this.loadEntry(this.entries[this.index]);
@@ -85,6 +86,11 @@
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
+    },
+
+    jumpMarker: function(num) {
+      google.maps.event.trigger(this.map, 'click');
+      console.log(this.map);
     }
 
   });
