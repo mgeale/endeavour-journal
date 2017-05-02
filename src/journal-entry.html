@@ -1,12 +1,17 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 <dom-module id="journal-entry">
   <template>
 
     <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
-    <div id="content">
+    <paper-card>
+      <div class="card-content">
+        <h2>Date: {{date}}<br>Day: {{days}}</h2>
+        <div id="content"></div>
+      </div>
+    </paper-card>
 
-    </div>
 
   </template>
 
@@ -19,6 +24,14 @@
 
       entry: {
         type: String
+      },
+
+      date: {
+        type: String
+      },
+
+      days: {
+        type: String
       }
 
     },
@@ -26,9 +39,19 @@
     listenJournalEntry: function(e) {
       var item = this.$$('#content');
       this.entry = e.detail.filename;
+      this.date = e.detail.date;
       this.importHref('../data/journal-pages/' + this.entry, function(e) {
         item.innerHTML = e.path[0].import.body.innerHTML;
       });
+      var startDate = new Date(1768,07,28);
+      var splitDate = e.detail.date.split("-");
+      var entryDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
+      this.days = this.calDays(startDate, entryDate);
+    },
+
+    calDays: function(startDate, entryDate) {
+      var oneDay = 24*60*60*1000;
+      return Math.round(Math.abs((startDate.getTime() - entryDate.getTime())/(oneDay)));
     }
 
   });

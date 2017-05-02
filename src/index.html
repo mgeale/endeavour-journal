@@ -1,15 +1,41 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="journal-nav.html">
 <link rel="import" href="journal-data.html">
-<link rel="import" href="journal-entry.html">
 
 <dom-module id="EndeavourJournal-app">
   <template>
+    <app-drawer-layout>
+      <app-drawer swipe-open>
+        <section>
+          <h3>Rio de Janeiro</h3>
 
-    <journal-nav></journal-nav>
-    <journal-data></journal-data>
-    <journal-entry></journal-entry>
+          <h3>Tahiti</h3>
 
+          <h3>New Zealand</h3>
+
+          <h3>Botany Bay</h3>
+
+          <h3>Cooktown</h3>
+
+          <h3>Possession Island</h3>
+
+          <h3>Jakarta</h3>
+
+        </section>
+      </app-drawer>
+      <app-header-layout>
+        <app-header>
+          <app-toolbar>
+            <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+            <div main-title>My app</div>
+          </app-toolbar>
+        </app-header>
+        <journal-nav></journal-nav>
+        <journal-data></journal-data>
+      </app-header-layout>
+    </app-drawer-layout>
   </template>
 
   <script>

@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/google-map/google-map.html">
 <link rel="import" href="../bower_components/iron-signals/iron-signals.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="journal-entry.html">
 
 <dom-module id="journal-nav">
   <template>
@@ -8,7 +11,7 @@
 
     <google-map
       map="{{map}}"
-      zoom="6"
+      zoom="4"
       latitude="50.351557"
       longitude="-4.146181"
       map-type="satellite"
@@ -24,8 +27,12 @@
       </template>
     </google-map>
 
-    <button on-click="clickPrev">Prev</button><button on-click="clickNext">Next</button>
-    <h2>Date: {{date}}<br>Day: {{days}}</h2>
+    <div style="display:flex; justify-content:space-between;">
+      <iron-icon icon="icons:chevron-left" on-click="clickPrev"></iron-icon>
+      <iron-icon icon="icons:chevron-right" on-click="clickNext"></iron-icon>
+    </div>
+
+    <journal-entry></journal-entry>
 
   </template>
   <script>
@@ -42,14 +49,6 @@
 
       entries: {
         type: Object
-      },
-
-      date: {
-        type: String
-      },
-
-      days: {
-        type: String
       }
     },
 
@@ -86,18 +85,6 @@
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
-      this.date = obj.date;
-      var startDate = new Date(1768,07,28);
-      var splitDate = obj.date.split("-");
-      var entryDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
-      this.days = this.calDays(startDate, entryDate);
-      console.log(this.index);
-      console.log(obj);
-    },
-
-    calDays: function(startDate, entryDate) {
-      var oneDay = 24*60*60*1000;
-      return Math.round(Math.abs((startDate.getTime() - entryDate.getTime())/(oneDay)));
     }
 
   });
