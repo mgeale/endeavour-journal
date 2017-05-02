@@ -11,7 +11,7 @@
     <google-map
       map="{{map}}"
       zoom="3"
-      latitude="-32.537951"
+      latitude="-27.537951"
       longitude="172.497693"
       map-type="satellite"
       disable-default-ui="true"
@@ -21,12 +21,13 @@
           latitude="{{entry.coordinates.latitude}}"
           longitude="{{entry.coordinates.longitude}}"
           click-events="true"
+          animation="DROP"
           on-google-map-marker-click="clickMarker">
         </google-map-marker>
       </template>
     </google-map>
 
-    <div style="display:flex; justify-content:space-between;">
+    <div style="display:flex; justify-content:space-around;">
       <paper-button on-click="clickPrev">Prev</paper-button>
       <paper-button on-click="clickNext">Next</paper-button>
     </div>

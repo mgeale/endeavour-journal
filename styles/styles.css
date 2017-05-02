@@ -1,5 +1,5 @@
 google-map {
-  height: 50vh;
+  height: 35vh;
   width: 75vw;
   margin: 20px auto;
 }
@@ -14,4 +14,8 @@ tbody tr td br {
 
 tbody tr td table {
   display: none;
+}
+
+body {
+  font-family: 'Roboto', 'Noto', sans-serif;
 }

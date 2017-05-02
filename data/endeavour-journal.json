@@ -4485,6 +4485,10 @@
     "filename": "17700402.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s221r"
+    },
+    "coordinates": {
+        "latitude": "-39.923384",
+        "longitude": "169.578341"
     }
 }, {
     "date": "1770-04-03",
@@ -4497,6 +4501,10 @@
     "filename": "17700404.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s221r"
+    },
+    "coordinates": {
+        "latitude": "-39.314068",
+        "longitude": "166.765841"
     }
 }, {
     "date": "1770-04-05",
@@ -4509,6 +4517,10 @@
     "filename": "17700406.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s221v"
+    },
+    "coordinates": {
+        "latitude": "-38.622190",
+        "longitude": "163.859957"
     }
 }, {
     "date": "1770-04-07",
@@ -4521,6 +4533,10 @@
     "filename": "17700408.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s221v"
+    },
+    "coordinates": {
+        "latitude": "-38.105340",
+        "longitude": "161.399020"
     }
 }, {
     "date": "1770-04-09",
@@ -4533,6 +4549,10 @@
     "filename": "17700410.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s222r"
+    },
+    "coordinates": {
+        "latitude": "-37.689208",
+        "longitude": "158.630466"
     }
 }, {
     "date": "1770-04-11",
@@ -4545,6 +4565,10 @@
     "filename": "17700412.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s222r"
+    },
+    "coordinates": {
+        "latitude": "-37.689208",
+        "longitude": "156.521091"
     }
 }, {
     "date": "1770-04-13",
@@ -4557,6 +4581,10 @@
     "filename": "17700414.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s222v"
+    },
+    "coordinates": {
+        "latitude": "-37.654424",
+        "longitude": "154.191989"
     }
 }, {
     "date": "1770-04-15",
@@ -4569,6 +4597,10 @@
     "filename": "17700416.html",
     "pages": {
         "page": "http://nla.gov.au/nla.ms-ms1-s222v"
+    },
+    "coordinates": {
+        "latitude": "-37.654424",
+        "longitude": "152.620944"
     }
 }, {
     "date": "1770-04-17",
