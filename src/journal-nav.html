@@ -11,17 +11,18 @@
     <google-map
       map="{{map}}"
       zoom="3"
-      latitude="-27.537951"
-      longitude="172.497693"
+      latitude="{{lat}}"
+      longitude="{{lng}}"
       map-type="satellite"
       disable-default-ui="true"
       api-key="AIzaSyCEowUZnnaTudIOq3XYaQLgVD0lOr-Bn1A">
       <template is="dom-repeat" items="{{entries}}" as="entry">
         <google-map-marker
+          id="marker.{{index}}"
           latitude="{{entry.coordinates.latitude}}"
           longitude="{{entry.coordinates.longitude}}"
           click-events="true"
-          animation="DROP"
+          animation=""
           on-google-map-marker-click="clickMarker">
         </google-map-marker>
       </template>
@@ -49,6 +50,20 @@
 
       entries: {
         type: Object
+      },
+
+      lat: {
+        type: Number,
+        value: -27.537951
+      },
+
+      lng: {
+        type: Number,
+        value: 172.497693
+      },
+
+      animate: {
+        type: String
       }
     },
 
@@ -57,10 +72,18 @@
       this.loadEntry(this.entries[this.index]);
     },
 
+    currentEntry: function() {
+      //to complete later
+    },
+
     clickNext: function() {
       if (this.index < 1049) {
+        document.getElementById("marker."+this.index).setAttribute("animation", "");
         this.index++;
         this.loadEntry(this.entries[this.index]);
+        this.lat = this.entries[this.index].coordinates.latitude;
+        this.lng = this.entries[this.index].coordinates.longitude;
+        document.getElementById("marker."+this.index).setAttribute("animation", "BOUNCE");
         this.jumpMarker(this.index);
       } else {
         this.index = 0;
@@ -70,8 +93,12 @@
 
     clickPrev: function() {
       if ((this.index > 0) && (this.index <= 1049)) {
+        document.getElementById("marker."+this.index).setAttribute("animation", "");
         this.index--;
         this.loadEntry(this.entries[this.index]);
+        this.lat = this.entries[this.index].coordinates.latitude;
+        this.lng = this.entries[this.index].coordinates.longitude;
+        document.getElementById("marker."+this.index).setAttribute("animation", "BOUNCE");
       } else {
         this.index = 1049;
         this.loadEntry(this.entries[this.index]);
@@ -89,7 +116,7 @@
     },
 
     jumpMarker: function(num) {
-      // console.log(this.map);
+      console.log(this.map);
     }
 
   });
