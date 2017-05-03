@@ -69,54 +69,46 @@
 
     listenJournalData: function(e) {
       this.entries = e.detail;
-      this.loadEntry(this.entries[this.index]);
-    },
-
-    currentEntry: function() {
-      //to complete later
+      this.currentEntry(this.index);
     },
 
     clickNext: function() {
       if (this.index < 1049) {
-        document.getElementById("marker."+this.index).setAttribute("animation", "");
         this.index++;
-        this.loadEntry(this.entries[this.index]);
-        this.lat = this.entries[this.index].coordinates.latitude;
-        this.lng = this.entries[this.index].coordinates.longitude;
-        document.getElementById("marker."+this.index).setAttribute("animation", "BOUNCE");
-        this.jumpMarker(this.index);
+        this.currentEntry(this.index);
       } else {
         this.index = 0;
-        this.loadEntry(this.entries[this.index]);
+        this.currentEntry(this.index);
       };
     },
 
     clickPrev: function() {
       if ((this.index > 0) && (this.index <= 1049)) {
-        document.getElementById("marker."+this.index).setAttribute("animation", "");
         this.index--;
-        this.loadEntry(this.entries[this.index]);
-        this.lat = this.entries[this.index].coordinates.latitude;
-        this.lng = this.entries[this.index].coordinates.longitude;
-        document.getElementById("marker."+this.index).setAttribute("animation", "BOUNCE");
+        this.currentEntry(this.index);
       } else {
         this.index = 1049;
-        this.loadEntry(this.entries[this.index]);
+        this.currentEntry(this.index);
       };
     },
 
     clickMarker: function(e) {
       var mapClick = e.model.__data__;
       this.index = mapClick.index;
-      this.loadEntry(mapClick.entry);
+      this.currentEntry(this.index);
+    },
+
+    currentEntry: function(num) {
+      this.loadEntry(this.entries[num]);
+      this.lat = this.entries[num].coordinates.latitude;
+      this.lng = this.entries[num].coordinates.longitude;
+      var currentMarker = document.getElementById("marker."+num);
+      // document.getElementById("marker."+(num-1)).setAttribute("animation", "");
+      currentMarker.setAttribute("animation", "BOUNCE");
     },
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
-    },
-
-    jumpMarker: function(num) {
-      console.log(this.map);
     }
 
   });
