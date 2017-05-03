@@ -7,7 +7,7 @@
     <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
     <paper-card>
       <div class="card-content">
-        <h2>{{date}}<br>{{days}}</h2>
+        <div style="display:flex; justify-content:center;"><h2>{{date}}</h2></div>
         <div id="content"></div>
       </div>
     </paper-card>
@@ -39,7 +39,6 @@
     listenJournalEntry: function(e) {
       var item = this.$$('#content');
       this.entry = e.detail.filename;
-      this.date = e.detail.date;
       this.importHref('../data/journal-pages/' + this.entry, function(e) {
         item.innerHTML = e.path[0].import.body.innerHTML;
       });
@@ -47,11 +46,27 @@
       var splitDate = e.detail.date.split("-");
       var entryDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
       this.days = this.calDays(startDate, entryDate);
+      this.date = this.formatDate(entryDate);
     },
 
     calDays: function(startDate, entryDate) {
       var oneDay = 24*60*60*1000;
       return Math.round(Math.abs((startDate.getTime() - entryDate.getTime())/(oneDay)));
+    },
+
+    formatDate: function(date) {
+      var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+      ];
+
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+
+      return day + ' ' + monthNames[monthIndex] + ' ' + year;
     }
 
   });
