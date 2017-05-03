@@ -2207,6 +2207,10 @@
     "filename": "17690413.html",
     "pages": {
         "page": ["http://nla.gov.au/nla.ms-ms1-s47v", "http://nla.gov.au/nla.ms-ms1-s48r", "http://nla.gov.au/nla.ms-ms1-s48v", "http://nla.gov.au/nla.ms-ms1-s49r", "http://nla.gov.au/nla.ms-ms1-s49v", "http://nla.gov.au/nla.ms-ms1-s50r", "http://nla.gov.au/nla.ms-ms1-s50v", "http://nla.gov.au/nla.ms-ms1-s51r", "http://nla.gov.au/nla.ms-ms1-s51v", "http://nla.gov.au/nla.ms-ms1-s52r"]
+    },
+    "coordinates": {
+        "latitude": "-17.651742",
+        "longitude": "-149.210799"
     }
 }, {
     "date": "1769-04-14",

@@ -11,8 +11,8 @@
     <google-map
       map="{{map}}"
       zoom="3"
-      latitude="{{lat}}"
-      longitude="{{lng}}"
+      latitude="-27.537951"
+      longitude="172.497693"
       map-type="satellite"
       disable-default-ui="true"
       api-key="AIzaSyCEowUZnnaTudIOq3XYaQLgVD0lOr-Bn1A">
@@ -30,6 +30,7 @@
 
     <div style="display:flex; justify-content:space-around;">
       <paper-button on-click="clickPrev">Prev</paper-button>
+      <paper-button on-click="currentLocation">Current Location</paper-button>
       <paper-button on-click="clickNext">Next</paper-button>
     </div>
 
@@ -45,25 +46,11 @@
 
       index: {
         type: Number,
-        value: 606
+        value: 250
       },
 
       entries: {
         type: Object
-      },
-
-      lat: {
-        type: Number,
-        value: -27.537951
-      },
-
-      lng: {
-        type: Number,
-        value: 172.497693
-      },
-
-      animate: {
-        type: String
       }
     },
 
@@ -98,13 +85,21 @@
       this.currentEntry(this.index);
     },
 
+    currentLocation: function() {
+      this.currentEntry(this.index);
+    },
+
     currentEntry: function(num) {
       this.loadEntry(this.entries[num]);
-      this.lat = this.entries[num].coordinates.latitude;
-      this.lng = this.entries[num].coordinates.longitude;
       var currentMarker = document.getElementById("marker."+num);
-      // document.getElementById("marker."+(num-1)).setAttribute("animation", "");
-      currentMarker.setAttribute("animation", "BOUNCE");
+      function bounceMarker() {
+        currentMarker.setAttribute("animation", "BOUNCE");
+        setTimeout(function() {
+          currentMarker.setAttribute("animation", "");
+        }, 2100);
+      };
+      bounceMarker();
+
     },
 
     loadEntry: function(obj) {

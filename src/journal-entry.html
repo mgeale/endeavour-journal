@@ -7,7 +7,7 @@
     <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
     <paper-card>
       <div class="card-content">
-        <div style="display:flex; justify-content:center;"><h2>{{date}}</h2></div>
+        <div style="display:flex; justify-content:center;"><h2>{{date}} {{date2}}</h2></div>
         <div id="content"></div>
       </div>
     </paper-card>
@@ -30,6 +30,10 @@
         type: String
       },
 
+      date2: {
+        type: String
+      },
+
       days: {
         type: String
       }
@@ -44,7 +48,7 @@
       });
       var startDate = new Date(1768,07,28);
       var splitDate = e.detail.date.split("-");
-      var entryDate = new Date(splitDate[0], splitDate[1], splitDate[2]);
+      var entryDate = new Date(splitDate[0], splitDate[1] -1, splitDate[2]);
       this.days = this.calDays(startDate, entryDate);
       this.date = this.formatDate(entryDate);
     },
