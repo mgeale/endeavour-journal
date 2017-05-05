@@ -7,7 +7,6 @@
   <template>
 
     <iron-signals on-iron-signal-load-data="listenJournalData"></iron-signals>
-
     <google-map
       map="{{map}}"
       zoom="3"
@@ -16,7 +15,7 @@
       map-type="satellite"
       disable-default-ui="true"
       api-key="AIzaSyCEowUZnnaTudIOq3XYaQLgVD0lOr-Bn1A">
-      <template is="dom-repeat" items="{{entries}}" as="entry">
+      <template id="marker" is="dom-repeat" items="{{entries}}" as="entry" initial-count="1">
         <google-map-marker
           id="marker_{{index}}"
           latitude="{{entry.coordinates.latitude}}"
@@ -55,7 +54,7 @@
 
     listenJournalData: function(e) {
       this.entries = e.detail;
-       this.currentEntry(this.index);
+      this.currentEntry(this.index);
     },
 
     clickNext: function() {
@@ -101,6 +100,7 @@
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
+      console.log("loadEntry complete")
     }
 
   });

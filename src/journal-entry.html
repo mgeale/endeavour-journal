@@ -6,10 +6,10 @@
   <template>
 
     <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
-    <div><paper-spinner active></paper-spinner></div>
+    <paper-spinner active></paper-spinner>
     <paper-card>
       <div class="card-content">
-        <div style="display:flex; justify-content:center;"><h2>{{date}} {{date2}}</h2></div>
+        <div style="display:flex; justify-content:center;"><h2>{{date}}</h2></div>
         <div id="content"></div>
       </div>
     </paper-card>
@@ -32,10 +32,6 @@
         type: String
       },
 
-      date2: {
-        type: String
-      },
-
       days: {
         type: String
       }
@@ -44,15 +40,15 @@
 
     listenJournalEntry: function(e) {
       var item = this.$$('#content');
-      var spinner = this.$$('paper-spinner');
       this.entry = e.detail.filename;
-      spinner.removeAttribute("active");
       this.importHref('../data/journal-pages/' + this.entry, function(e) {
         item.innerHTML = e.path[0].import.body.innerHTML;
       });
       var startDate = new Date(1768,07,28);
       var splitDate = e.detail.date.split("-");
       var entryDate = new Date(splitDate[0], splitDate[1] -1, splitDate[2]);
+      var spinner = this.$$('paper-spinner');
+      spinner.removeAttribute("active");
       this.days = this.calDays(startDate, entryDate);
       this.date = this.formatDate(entryDate);
     },
@@ -63,12 +59,7 @@
     },
 
     formatDate: function(date) {
-      var monthNames = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
-      ];
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
       var day = date.getDate();
       var monthIndex = date.getMonth();

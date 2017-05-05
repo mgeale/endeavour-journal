@@ -19,6 +19,7 @@
 
     handleResponse: function(e) {
       this.fire('iron-signal', {name: 'load-data', data: e.detail.response});
+      console.log("handleResponse complete")
     }
   });
 
