@@ -18,7 +18,7 @@
       api-key="AIzaSyCEowUZnnaTudIOq3XYaQLgVD0lOr-Bn1A">
       <template is="dom-repeat" items="{{entries}}" as="entry">
         <google-map-marker
-          id="marker.{{index}}"
+          id="marker_{{index}}"
           latitude="{{entry.coordinates.latitude}}"
           longitude="{{entry.coordinates.longitude}}"
           click-events="true"
@@ -27,11 +27,9 @@
         </google-map-marker>
       </template>
     </google-map>
-
     <div style="display:flex; justify-content:space-around;">
       <paper-button on-click="clickPrev">Prev</paper-button>
       <paper-button on-click="currentLocation">Current Location</paper-button>
-      <!-- <div>No marker</div> -->
       <paper-button on-click="clickNext">Next</paper-button>
     </div>
 
@@ -47,7 +45,7 @@
 
       index: {
         type: Number,
-        value: 250
+        value: 600
       },
 
       entries: {
@@ -57,7 +55,7 @@
 
     listenJournalData: function(e) {
       this.entries = e.detail;
-      this.currentEntry(this.index);
+       this.currentEntry(this.index);
     },
 
     clickNext: function() {
@@ -92,15 +90,13 @@
 
     currentEntry: function(num) {
       this.loadEntry(this.entries[num]);
-      var currentMarker = document.getElementById("marker."+num);
-      function bounceMarker() {
+      var currentMarker = document.getElementById("marker_"+num);
+      (function bounceMarker() {
         currentMarker.setAttribute("animation", "BOUNCE");
         setTimeout(function() {
           currentMarker.setAttribute("animation", "");
         }, 2100);
-      };
-      bounceMarker();
-
+      })();
     },
 
     loadEntry: function(obj) {

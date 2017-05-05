@@ -1,10 +1,12 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 
 <dom-module id="journal-entry">
   <template>
 
     <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
+    <div><paper-spinner active></paper-spinner></div>
     <paper-card>
       <div class="card-content">
         <div style="display:flex; justify-content:center;"><h2>{{date}} {{date2}}</h2></div>
@@ -42,7 +44,9 @@
 
     listenJournalEntry: function(e) {
       var item = this.$$('#content');
+      var spinner = this.$$('paper-spinner');
       this.entry = e.detail.filename;
+      spinner.removeAttribute("active");
       this.importHref('../data/journal-pages/' + this.entry, function(e) {
         item.innerHTML = e.path[0].import.body.innerHTML;
       });
