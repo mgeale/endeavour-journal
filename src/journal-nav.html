@@ -28,7 +28,7 @@
     </google-map>
     <div style="display:flex; justify-content:space-around;">
       <paper-button on-click="clickPrev">Prev</paper-button>
-      <paper-button on-click="currentLocation">Current Location</paper-button>
+      <paper-button id="locateBtn" on-click="currentLocation">Current Location</paper-button>
       <paper-button on-click="clickNext">Next</paper-button>
     </div>
 
@@ -100,7 +100,6 @@
 
     loadEntry: function(obj) {
       this.fire('iron-signal', {name: 'send-data', data: obj});
-      console.log("loadEntry complete")
     }
 
   });
