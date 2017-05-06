@@ -41,7 +41,7 @@
     listenJournalEntry: function(e) {
       console.log(e);
       var item = this.$$('#content');
-      this.entry = e.target.filename;
+      this.entry = e.detail.filename;
       this.importHref('../data/journal-pages/' + this.entry, function(e) {
         // item.innerHTML = e.path[0].import.body.innerHTML;
         item.innerHTML = e.target.import.body.innerHTML;
