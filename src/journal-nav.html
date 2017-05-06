@@ -15,7 +15,7 @@
       map-type="satellite"
       disable-default-ui="true"
       api-key="AIzaSyCEowUZnnaTudIOq3XYaQLgVD0lOr-Bn1A">
-      <template id="marker" is="dom-repeat" items="{{entries}}" as="entry" initial-count="1">
+      <template is="dom-repeat" items="{{entries}}" as="entry" initial-count="1">
         <google-map-marker
           id="marker_{{index}}"
           latitude="{{entry.coordinates.latitude}}"

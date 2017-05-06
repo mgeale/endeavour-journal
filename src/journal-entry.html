@@ -3,11 +3,12 @@
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 
 <dom-module id="journal-entry">
+
   <template>
 
     <iron-signals on-iron-signal-send-data="listenJournalEntry"></iron-signals>
-    <paper-spinner active></paper-spinner>
     <paper-card>
+      <div><paper-spinner active></paper-spinner></div>
       <div class="card-content">
         <div style="text-align:center;"><h2>{{date}}</h2></div>
         <div id="content"></div>
@@ -38,18 +39,23 @@
     },
 
     listenJournalEntry: function(e) {
+      console.log(e);
       var item = this.$$('#content');
-      this.entry = e.detail.filename;
+      this.entry = e.target.filename;
       this.importHref('../data/journal-pages/' + this.entry, function(e) {
-        item.innerHTML = e.path[0].import.body.innerHTML;
+        // item.innerHTML = e.path[0].import.body.innerHTML;
+        item.innerHTML = e.target.import.body.innerHTML;
       });
+      console.log("importHref complete")
+      // date
       var startDate = new Date(1768,07,28);
       var splitDate = e.detail.date.split("-");
       var entryDate = new Date(splitDate[0], splitDate[1] -1, splitDate[2]);
-      var spinner = this.$$('paper-spinner');
-      spinner.removeAttribute("active");
       this.days = this.calDays(startDate, entryDate);
       this.date = this.formatDate(entryDate);
+      // preload effects
+      var spinner = this.$$('paper-spinner');
+      spinner.removeAttribute("active");
     },
 
     calDays: function(startDate, entryDate) {
