@@ -34,11 +34,12 @@
         </google-map-marker>
       </template>
     </google-map>
+    <div><a on-click="currentLocation">current position</a></div>
 
     <div class="card-content">
       <div style="display:flex; justify-content:space-around;">
         <paper-button icon="" on-click="clickPrev">Prev</paper-button>
-        <div><h2>{{date}}</h2><a on-click="currentLocation">position</a></div>
+        <div><h2>{{date}}</h2></div>
         <paper-button icon="" on-click="clickNext">Next</paper-button>
       </div>
       <div id="content"></div>
