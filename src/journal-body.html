@@ -1,12 +1,19 @@
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/google-map/google-map.html">
 <link rel="import" href="../bower_components/iron-signals/iron-signals.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="journal-entry.html">
 
-<dom-module id="journal-nav">
+<dom-module id="journal-body">
   <template>
 
-    <iron-signals on-iron-signal-load-data="listenJournalData"></iron-signals>
+    <iron-ajax
+      auto
+      url="../data/endeavour-journal.json"
+      handle-as="json"
+      on-response="handleResponse"
+      last-response="{{response}}">
+    </iron-ajax>
+
     <google-map
       map="{{map}}"
       zoom="3"
@@ -32,13 +39,16 @@
       <paper-button on-click="clickNext">Next</paper-button>
     </div>
 
-    <journal-entry></journal-entry>
+    <div class="card-content">
+      <div style="text-align:center;"><h2>{{date}}</h2></div>
+      <div id="content"></div>
+    </div>
 
   </template>
   <script>
 
   Polymer({
-    is: 'journal-nav',
+    is: 'journal-body',
 
     properties: {
 
@@ -47,13 +57,22 @@
         value: 600
       },
 
+      entry: {
+        type: String
+      },
+
       entries: {
         type: Object
+      },
+
+      date: {
+        type: String
       }
     },
 
-    listenJournalData: function(e) {
-      this.entries = e.detail;
+    handleResponse: function(e) {
+      console.log(e);
+      this.entries = e.detail.response;
       this.currentEntry(this.index);
     },
 
@@ -99,7 +118,23 @@
     },
 
     loadEntry: function(obj) {
-      this.fire('iron-signal', {name: 'send-data', data: obj});
+      var item = this.$$('#content');
+      this.entry = obj.filename;
+      this.importHref('../data/journal-pages/' + this.entry, function(e) {
+        item.innerHTML = e.target.import.body.innerHTML;
+      });
+      var startDate = new Date(1768,07,28);
+      var splitDate = obj.date.split("-");
+      var entryDate = new Date(splitDate[0], splitDate[1] -1, splitDate[2]);
+      this.date = this.formatDate(entryDate);
+    },
+
+    formatDate: function(date) {
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+      return day + ' ' + monthNames[monthIndex] + ' ' + year;
     }
 
   });
