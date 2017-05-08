@@ -3,6 +3,7 @@
 <link rel="import" href="../bower_components/iron-signals/iron-signals.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <dom-module id="journal-body">
   <template>
@@ -34,13 +35,12 @@
         </google-map-marker>
       </template>
     </google-map>
-    <div><a on-click="currentLocation">current position</a></div>
 
     <div class="card-content">
-      <div style="display:flex; justify-content:space-around;">
-        <paper-button icon="" on-click="clickPrev">Prev</paper-button>
-        <div><h2>{{date}}</h2></div>
-        <paper-button icon="" on-click="clickNext">Next</paper-button>
+      <div style="display:flex; justify-content:space-between;">
+        <paper-button on-click="clickPrev"><i class="material-icons">keyboard_arrow_left</i></paper-button>
+        <div style="display:flex;"><h2>{{date}}</h2><div on-click="currentLocation"><i id="marker_icon" class="material-icons">location_on</i></div></div>
+        <paper-button on-click="clickNext"><i class="material-icons">keyboard_arrow_right</i></paper-button>
       </div>
       <div id="content"></div>
     </div>
@@ -55,7 +55,7 @@
 
       index: {
         type: Number,
-        value: 600
+        value: 615
       },
 
       entry: {
@@ -115,6 +115,12 @@
           currentMarker.setAttribute("animation", "");
         }, 2100);
       })();
+      var markerIcon = document.getElementById("marker_icon");
+      if (this.entries[num].coordinates.latitude == "") {
+        markerIcon.innerHTML = "location_off";
+      } else if (!this.entries[num].coordinates.latitude == "") {
+        markerIcon.innerHTML = "location_on";
+      }
     },
 
     loadEntry: function(obj) {
