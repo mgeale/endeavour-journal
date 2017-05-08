@@ -8,9 +8,11 @@
 <dom-module id="journal-body">
   <template>
 
+    <iron-signals on-iron-signal-goto-index="clickGoTo"></iron-signals>
+
     <iron-ajax
       auto
-      url="../data/endeavour-journal.json"
+      url="../data/endeavour-journal-2.json"
       handle-as="json"
       on-response="handleResponse"
       last-response="{{response}}">
@@ -39,10 +41,12 @@
     <div class="card-content">
       <div style="display:flex; justify-content:space-between;">
         <paper-button on-click="clickPrev"><i class="material-icons">keyboard_arrow_left</i></paper-button>
-        <div style="display:flex;"><h2>{{date}}</h2><div on-click="currentLocation"><i id="marker_icon" class="material-icons">location_on</i></div></div>
+        <div style="display:flex;"><h2>{{date}}</h2><div title="Marker Location" on-click="currentLocation"><h2><i id="marker_icon" class="material-icons">location_on</i></h2></div></div>
         <paper-button on-click="clickNext"><i class="material-icons">keyboard_arrow_right</i></paper-button>
       </div>
-      <div id="content"></div>
+      <div id="content">
+        <p>Click on markers above.</p>
+      </div>
     </div>
 
   </template>
@@ -73,6 +77,10 @@
 
     handleResponse: function(e) {
       this.entries = e.detail.response;
+    },
+
+    clickGoTo: function(e) {
+      this.index = e.detail.srcElement.id;
       this.currentEntry(this.index);
     },
 
@@ -116,10 +124,10 @@
         }, 2100);
       })();
       var markerIcon = document.getElementById("marker_icon");
-      if (this.entries[num].coordinates.latitude == "") {
-        markerIcon.innerHTML = "location_off";
-      } else if (!this.entries[num].coordinates.latitude == "") {
+      if (this.entries[num].coordinates.latitude != null) {
         markerIcon.innerHTML = "location_on";
+      } else if (this.entries[num].coordinates.latitude == null) {
+        markerIcon.innerHTML = "location_off";
       }
     },
 

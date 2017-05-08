@@ -9,14 +9,13 @@
       <app-drawer swipe-open>
         <section>
           <h2>About</h2>
-          <h2>Home</h2>
           <h2>Go to</h2>
-          <p>13 April 1769, arrival at Tahiti.</p>
-          <p>7 October 1769, arrival at Poverty Bay, New Zealand.</p>
-          <p>29 April 1770, arrival at Botany Bay, Australia.</p>
-          <p>11 June 1770, ship strikes coral reef causing severe damage.</p>
-          <p>22 August 1770, declares the east coast of Australia a British territory.</p>
-          <p>10 October 1770, arrival at Batavia (Jakarta).</p>
+          <p><button on-click="goto" id="250">13 April 1769</button>, arrival at Tahiti.</p>
+          <p><button on-click="goto" id="350">7 October 1769</button>, arrival at Poverty Bay, New Zealand.</p>
+          <p><button on-click="goto" id="250">29 April 1770</button>, arrival at Botany Bay, Australia.</p>
+          <p><button on-click="goto" id="250">11 June 1770</button>, ship strikes coral reef causing severe damage.</p>
+          <p><button on-click="goto" id="250">22 August 1770</button>, declares the east coast of Australia a British territory.</p>
+          <p><button on-click="goto" id="250">10 October 1770</button>, arrival at Batavia (Jakarta).</p>
         </section>
       </app-drawer>
       <app-header-layout>
@@ -33,6 +32,10 @@
   <script>
     Polymer({
       is: "EndeavourJournal-app",
+
+      goto: function(index) {
+        this.fire('iron-signal', {name: 'goto-index', data: index});
+      }
 
     });
   </script>
