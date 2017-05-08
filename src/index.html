@@ -2,15 +2,39 @@
 <link rel="import" href="../bower_components/app-layout/app-layout.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="journal-body.html">
 
 <dom-module id="EndeavourJournal-app">
   <template>
+    <style>
+
+      app-drawer {
+        --app-drawer-content-container: {
+          background-color: burlywood;
+          overflow-x: hidden;
+        };
+      }
+      app-drawer h2 {
+      margin: 8px 0 0;
+      padding: 18px;
+      font-size: 18px;
+      }
+      app-drawer p {
+      display: block;
+      padding: 18px;
+      }
+      app-header {
+
+      }
+      [main-title] {
+      font-size: 1em;
+      }
+    </style>
     <app-drawer-layout>
-      <app-drawer swipe-open>
+      <app-drawer id="drawer">
         <section>
-          <h1>About</h1>
-          <h1>Go to</h1>
+          <h2>Go to</h2>
           <p><button on-click="goto" id="250">13 April 1769</button>, arrival at Tahiti.</p>
           <p><button on-click="goto" id="411">7 October 1769</button>, arrival at Poverty Bay, New Zealand.</p>
           <p><button on-click="goto" id="615">29 April 1770</button>, arrival at Botany Bay, Australia.</p>
@@ -20,8 +44,9 @@
         </section>
       </app-drawer>
       <app-header-layout>
-        <app-header>
+        <app-header reveals>
           <app-toolbar>
+            <!-- <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> -->
             <div main-title><h3>Captain James Cook onboard HMS Endeavour, 1768 to 1771</h3></div>
           </app-toolbar>
         </app-header>
