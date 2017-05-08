@@ -10122,8 +10122,8 @@
         ]
     },
     "coordinates": {
-        "latitude": null,
-        "longitude": null
+        "latitude": -6.082328,
+        "longitude": 106.824783
     }
 }, {
     "date": "1770-10-10",
@@ -10135,8 +10135,8 @@
         ]
     },
     "coordinates": {
-        "latitude": -6.082328,
-        "longitude": 106.824783
+        "latitude": null,
+        "longitude": null
     }
 }, {
     "date": "1770-10-11",
