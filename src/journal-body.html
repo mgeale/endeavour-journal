@@ -144,14 +144,19 @@
 
     currentEntry: function(num) {
       var currentMarker = document.getElementById("marker_"+num);
-      function bounceMarker() {
+      (function bounceMarker() {
         currentMarker.setAttribute("animation", "BOUNCE");
         setTimeout(function() {
           currentMarker.setAttribute("animation", "");
         }, 2100);
-      };
-      bounceMarker();
+      })();
       this.loadEntry(this.entries[num]);
+      var markerIcon = document.getElementById("marker_icon");
+      if (this.entries[num].coordinates.latitude != null) {
+        markerIcon.innerHTML = "location_on";
+      } else if (this.entries[num].coordinates.latitude == null) {
+        markerIcon.innerHTML = "location_off";
+      }
     },
 
     loadEntry: function(obj) {
@@ -164,12 +169,6 @@
       var splitDate = obj.date.split("-");
       var entryDate = new Date(splitDate[0], splitDate[1] -1, splitDate[2]);
       this.date = this.formatDate(entryDate);
-      var markerIcon = document.getElementById("marker_icon");
-      if (this.entries[num].coordinates.latitude != null) {
-        markerIcon.innerHTML = "location_on";
-      } else if (this.entries[num].coordinates.latitude == null) {
-        markerIcon.innerHTML = "location_off";
-      }
     },
 
     formatDate: function(date) {
