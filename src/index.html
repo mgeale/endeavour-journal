@@ -1,8 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-layout/app-layout.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="import" href="journal-body.html">
 
 <dom-module id="EndeavourJournal-app">
@@ -11,43 +12,52 @@
 
       app-drawer {
         --app-drawer-content-container: {
-          background-color: burlywood;
+          /*background-color: burlywood;*/
           overflow-x: hidden;
         };
       }
-      app-drawer h2 {
-      margin: 8px 0 0;
-      padding: 18px;
-      font-size: 18px;
-      }
-      app-drawer p {
-      display: block;
-      padding: 18px;
-      }
-      app-header {
 
+      app-drawer h2 {
+        margin: 8px 0 0;
+        padding: 18px;
+        font-size: 20px;
+        font-family:"CatholicGirlsW01-Regula";
       }
+
+      #section-head {
+        height: 65px;
+      }
+
       [main-title] {
-      font-size: 1em;
+        font-size: 1em;
       }
+
+      .title {
+        font-family:"CatholicGirlsW01-Regula";
+      }
+
     </style>
     <app-drawer-layout>
       <app-drawer id="drawer">
+        <section id="section-head" style="display:flex;">
+          <h2>About</h2>
+          <h2>Home</h2>
+        </section>
         <section>
-          <h2>Go to</h2>
-          <p><button on-click="goto" id="250">13 April 1769</button>, arrival at Tahiti.</p>
-          <p><button on-click="goto" id="411">7 October 1769</button>, arrival at Poverty Bay, New Zealand.</p>
-          <p><button on-click="goto" id="615">29 April 1770</button>, arrival at Botany Bay, Australia.</p>
-          <p><button on-click="goto" id="658">11 June 1770</button>, ship strikes coral reef causing significant damage.</p>
-          <p><button on-click="goto" id="730">22 August 1770</button>, declares the east coast of Australia a British territory.</p>
-          <p><button on-click="goto" id="778">9 October 1770</button>, arrival at Batavia (Jakarta).</p>
+          <h2>Key entries</h2>
+          <paper-button on-click="goto" id="250">Arrival at Tahiti, 13 April 1769 <i class="material-icons">chevron_right</i></paper-button>
+          <paper-button on-click="goto" id="411">Arrival at Poverty Bay, 7 October 1769<i class="material-icons">chevron_right</i></paper-button>
+          <paper-button on-click="goto" id="615">Arrival at Botany Bay, 29 April 1770<i class="material-icons">chevron_right</i></paper-button>
+          <paper-button on-click="goto" id="658">Ship strikes coral reef, 11 June 1770<i class="material-icons">chevron_right</i></paper-button>
+          <paper-button on-click="goto" id="730">Australia declared a British territory, 22 August 1770<i class="material-icons">chevron_right</i></paper-button>
+          <paper-button on-click="goto" id="778">Arrival at Batavia (Jakarta), 9 October 1770<i class="material-icons">chevron_right</i>
         </section>
       </app-drawer>
       <app-header-layout>
         <app-header reveals>
           <app-toolbar>
-            <!-- <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> -->
-            <div main-title><h3>Captain James Cook onboard HMS Endeavour, 1768 to 1771</h3></div>
+            <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+            <div main-title><span class="title">Captain James Cook onboard HMS Endeavour, 1768 to 1771</span></div>
           </app-toolbar>
         </app-header>
         <journal-body></journal-body>

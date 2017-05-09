@@ -1,0 +1,21 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/journal-body.html",
+  "fragments": [
+    
+  ],
+  "sources": [
+    "src/**/*",
+    "data/**/*",
+    "styles/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js",
+    "bower_components/app-layout/app-layout.html",
+    "bower_components/iron-ajax/iron-ajax.html",
+    "bower_components/google-map/google-map.html",
+    "bower_components/iron-signals/iron-signals.html",
+    "bower_components/paper-button/paper-button.html"
+  ]
+}

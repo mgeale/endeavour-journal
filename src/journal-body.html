@@ -6,6 +6,25 @@
 
 <dom-module id="journal-body">
   <template>
+    <style>
+
+    google-map {
+      height: 35vh;
+      width: 85%;
+      margin: 20px auto;
+    }
+
+    .date {
+      font-family:"CatholicGirlsW01-Regula";
+      font-size: 25px;
+    }
+
+    #marker_icon {
+      margin-top: 12px;
+      margin-left: 4px;
+    }
+
+    </style>
 
     <iron-signals on-iron-signal-goto-index="clickGoTo"></iron-signals>
 
@@ -40,7 +59,7 @@
     <div class="card-content">
       <div style="display:flex; justify-content:space-between;">
         <paper-button on-click="clickPrev"><i class="material-icons">keyboard_arrow_left</i></paper-button>
-        <div style="display:flex;"><h2>{{date}}</h2><div title="Marker Location" on-click="currentLocation"><h2><i id="marker_icon" class="material-icons">location_on</i></h2></div></div>
+        <div style="display:flex;"><span class="date">{{date}}</span><div title="Marker Location" on-click="currentLocation"><i id="marker_icon" class="material-icons">location_on</i></div></div>
         <paper-button on-click="clickNext"><i class="material-icons">keyboard_arrow_right</i></paper-button>
       </div>
       <div id="content">
