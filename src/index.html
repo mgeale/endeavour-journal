@@ -29,11 +29,24 @@
         font-family:"CatholicGirlsW01-Regula";
       }
 
+      h2 a {
+        text-decoration: none;
+        color: black;
+      }
+
+      h2 a:hover {
+        text-decoration: underline;
+      }
+
+      paper-button:hover {
+        background: lightgrey;
+      }
+
     </style>
 
       <app-drawer id="drawer">
         <section>
-          <h2>About</h2>
+          <h2><a href="#">About</a></h2>
           <h2>Key entries</h2>
           <paper-button on-click="goto" id="250">Arrival at Tahiti, 13 April 1769 <i class="material-icons">chevron_right</i></paper-button>
           <paper-button on-click="goto" id="411">Arrival at Poverty Bay, 7 October 1769<i class="material-icons">chevron_right</i></paper-button>

@@ -35,7 +35,7 @@
 
     <iron-ajax
       auto
-      url="../data/endeavour-journal-2.json"
+      url="../data/endeavour-journal.json"
       handle-as="json"
       on-response="handleResponse"
       last-response="{{response}}">
@@ -68,7 +68,9 @@
         <paper-button on-click="clickNext"><i class="material-icons">keyboard_arrow_right</i></paper-button>
       </div>
       <div id="content">
-        <p style="text-align:center;">Click marker to show journal entry.</p>
+        <div style="text-align:center;">
+          <p>Click marker to show journal entry.</p>
+        </div>
       </div>
     </div>
 
