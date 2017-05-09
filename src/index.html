@@ -11,10 +11,7 @@
     <style>
 
       app-drawer {
-        --app-drawer-content-container: {
-          /*background-color: burlywood;*/
-          overflow-x: hidden;
-        };
+        z-index: 1000;
       }
 
       app-drawer h2 {
@@ -24,12 +21,8 @@
         font-family:"CatholicGirlsW01-Regula";
       }
 
-      #section-head {
-        height: 65px;
-      }
-
       [main-title] {
-        font-size: 1em;
+        /*font-size: 1em;*/
       }
 
       .title {
@@ -37,13 +30,10 @@
       }
 
     </style>
-    <app-drawer-layout>
+
       <app-drawer id="drawer">
-        <section id="section-head" style="display:flex;">
-          <h2>About</h2>
-          <h2>Home</h2>
-        </section>
         <section>
+          <h2>About</h2>
           <h2>Key entries</h2>
           <paper-button on-click="goto" id="250">Arrival at Tahiti, 13 April 1769 <i class="material-icons">chevron_right</i></paper-button>
           <paper-button on-click="goto" id="411">Arrival at Poverty Bay, 7 October 1769<i class="material-icons">chevron_right</i></paper-button>
@@ -53,16 +43,14 @@
           <paper-button on-click="goto" id="778">Arrival at Batavia (Jakarta), 9 October 1770<i class="material-icons">chevron_right</i>
         </section>
       </app-drawer>
-      <app-header-layout>
-        <app-header reveals>
-          <app-toolbar>
-            <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
-            <div main-title><span class="title">Captain James Cook onboard HMS Endeavour, 1768 to 1771</span></div>
-          </app-toolbar>
-        </app-header>
-        <journal-body></journal-body>
-      </app-header-layout>
-    </app-drawer-layout>
+      <app-header reveals>
+        <app-toolbar>
+          <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+          <div main-title><span class="title">Captain James Cook onboard HMS Endeavour, 1768 to 1771</span></div>
+        </app-toolbar>
+      </app-header>
+      <journal-body></journal-body>
+
   </template>
 
   <script>
@@ -70,7 +58,10 @@
       is: "EndeavourJournal-app",
 
       goto: function(index) {
-        this.fire('iron-signal', {name: 'goto-index', data: index});
+        this.fire('iron-signal', {
+          name: 'goto-index',
+          data: index
+        });
       }
 
     });

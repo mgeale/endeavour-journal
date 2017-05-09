@@ -24,6 +24,11 @@
       margin-left: 4px;
     }
 
+    .card-content {
+      margin: auto;
+      width: 85%;
+    }
+
     </style>
 
     <iron-signals on-iron-signal-goto-index="clickGoTo"></iron-signals>
@@ -57,7 +62,7 @@
     </google-map>
 
     <div class="card-content">
-      <div style="display:flex; justify-content:space-between;">
+      <div style="display:flex; justify-content:space-around;">
         <paper-button on-click="clickPrev"><i class="material-icons">keyboard_arrow_left</i></paper-button>
         <div style="display:flex;"><span class="date">{{date}}</span><div title="Marker Location" on-click="currentLocation"><i id="marker_icon" class="material-icons">location_on</i></div></div>
         <paper-button on-click="clickNext"><i class="material-icons">keyboard_arrow_right</i></paper-button>
