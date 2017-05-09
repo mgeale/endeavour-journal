@@ -8,6 +8,6 @@ In it he tracks the ship's course as it travels from Plymouth, England, undernea
 
 Along the way he writes of his encounters with Tahiti Polynesians, New Zealand Maori and Australian Aborigines.
 
-In this web app I have tried to present his journal entries in a format that is easy to follow using Google Maps. The dataset was downloaded from the Australian National Library website, <a href="http://catalogue.nla.gov.au/Record/3525402" target="_blank">see more</a>.
+In this web app I have tried to present his journal entries in a format that is easy to follow using Google Maps. The dataset was downloaded from the National Library of Australia website, <a href="http://catalogue.nla.gov.au/Record/3525402" target="_blank">see more</a>.
 
 See <a href="https://www.mgeale.com/" target="_blank">mgeale.com</a> for more information about me.
