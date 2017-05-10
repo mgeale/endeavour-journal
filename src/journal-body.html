@@ -68,11 +68,6 @@
         <paper-button on-click="clickNext"><i class="material-icons">keyboard_arrow_right</i></paper-button>
       </div>
       <div id="content">
-        <div style="text-align:center;font-family:fantasy;">
-          <p>On his voyage to the South Pacific, Captain James Cook kept a journal to document his experiences. In it he tracks the ship's course as it travels from Plymouth, England, underneath Cape Horn, across the Pacific to Tahiti, around New Zealand, and up the east coast of Australia. Along the way he writes of his encounters with Tahiti Polynesians, New Zealand Maori and Australian Aborigines.</p>
-          <p>In this web app I have tried to present his journal entries in a format that is easy to follow using Google Maps. The dataset was downloaded from the National Library of Australia website, <a href="http://catalogue.nla.gov.au/Record/3525402" target="_blank">see more</a>. See <a href="https://www.mgeale.com/" target="_blank">mgeale.com</a> for more information about me.</p>
-          <p>To begin select a marker to show that location's entry. Some entries do not have corresponding markers, these are indicated with <i class="material-icons">location_off</i> and can be viewed by using <i class="material-icons">keyboard_arrow_left</i><i class="material-icons">keyboard_arrow_right</i>.</p>
-        </div>
       </div>
     </div>
 
@@ -100,6 +95,10 @@
       date: {
         type: String
       }
+    },
+
+    ready: function() {
+      this.loadIntro();
     },
 
     handleResponse: function(e) {
@@ -157,6 +156,12 @@
       } else if (this.entries[num].coordinates.latitude == null) {
         markerIcon.innerHTML = "location_off";
       }
+    },
+
+    loadIntro: function() {
+      var item = this.$$('#content');
+      var about = "<div style=text-align:center;font-family:fantasy><p>On his voyage to the South Pacific, Captain James Cook kept a journal to document his experiences. In it he tracks the ship's course as it travels from Plymouth, England, underneath Cape Horn, across the Pacific to Tahiti, around New Zealand, and up the east coast of Australia. Along the way he writes of his encounters with Tahiti Polynesians, New Zealand Maori and Australian Aborigines.<p>In this web app I have tried to present his journal entries in a format that is easy to follow using Google Maps. The dataset was downloaded from the National Library of Australia website, <a href=http://catalogue.nla.gov.au/Record/3525402 target=_blank>see more</a>. See <a href=https://www.mgeale.com/ target=_blank>mgeale.com</a> for more information about me.<p>Select a marker to show that location's entry. Some entries do not have corresponding markers, these are indicated with  <i class=material-icons>location_off</i> and can be viewed by using <i class=material-icons>keyboard_arrow_left</i><i class=material-icons>keyboard_arrow_right</i>.</div>";
+      item.innerHTML = about;
     },
 
     loadEntry: function(obj) {
