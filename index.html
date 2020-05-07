@@ -1,23 +1,71 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
+    <title>Capt. Cook Journal Onboard HMS Endeavour, 1768 to 1771</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-    <title>Captain James Cook onboard HMS Endeavour, 1768 to 1771</title>
-    <meta name="description" content="This web app presents Captain James Cook journal entries onboard HMS Endeavour in a format that is easy to follow using Google Maps.">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TG5P93');</script>
-    <!-- End Google Tag Manager -->
-    <link rel="manifest" href="/manifest.json">
-    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="/src/index.html">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"></link>
   </head>
   <body>
-    <EndeavourJournal-app></EndeavourJournal-app>
+
+  <div id="container"></div>
+
+  <div id="info">
+    <strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong>
+    <span class="bull">&bull;</span>
+    Created by <a href="https://twitter.com/mgeale">Matthew Geale</a>
+    <span class="bull">&bull;</span>
+    Data acquired from <a href="https://catalogue.nla.gov.au/Record/3525402">National Library of Australia</a>
+    <span class="bull">&bull;</span>
+    Starfield from <a href="http://labs.gmtaz.com/quake/">GMTAZ.com</a>
+    <span class="bull">&bull;</span>
+    Earth map from <a href="http://orbitingeden.com/orrery/soloearth.html">Orbiting Eden</a>
+  </div>
+
+  <div id="title">
+    HMS Endeavour, 1768 to 1771
+  </div>
+
+  <a id="ce" href="http://www.chromeexperiments.com/globe">
+    <span>This is a Chrome Experiment</span>
+  </a>
+
+  <script type="text/javascript" src="/js/third-party/Detector.js"></script>
+  <script type="text/javascript" src="/js/third-party/three.min.js"></script>
+  <script type="text/javascript" src="/js/globe.js"></script>
+  <script type="text/javascript">
+
+    if(!Detector.webgl){
+      Detector.addGetWebGLMessage();
+    } else {
+
+      var container = document.getElementById('container');
+      var globe = new DAT.Globe(container);
+
+      console.log(globe);
+      
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/endeavour-journal.json', true);
+      xhr.onreadystatechange = function(e) {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            window.data = data;
+            var coordinates = [];
+            for (i=0;i<data.length;i++) {
+              coordinates.push(data[i].coordinates.latitude, data[i].coordinates.longitude, 0.01);
+            }
+            globe.addData(coordinates, {format: 'magnitude', animated: true})
+            globe.createPoints();
+            globe.animate();
+            // document.body.style.backgroundImage = 'none'; // remove loading
+          }
+        }
+      };
+      xhr.send(null);
+    }
+
+  </script>
+
   </body>
+
 </html>
