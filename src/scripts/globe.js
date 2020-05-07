@@ -1,63 +1,8 @@
 import * as THREE from 'three';
 import WorldImage from '../images/world.jpg';
+import Shaders from './shaders';
 
-var DAT = DAT || {};
-
-export default DAT.Globe = function(container, opts) {
-    opts = opts || {};
-
-    var colorFn = opts.colorFn || function(x) {
-        var c = new THREE.Color();
-        c.setHSL((0.6 - (x * 0.5)), 1.0, 0.5);
-        return c;
-    };
-    var imgDir = opts.imgDir || './';
-
-    var Shaders = {
-        'earth': {
-            uniforms: {
-                'texture': { type: 't', value: null }
-            },
-            vertexShader: [
-                'varying vec3 vNormal;',
-                'varying vec2 vUv;',
-                'void main() {',
-                'gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );',
-                'vNormal = normalize( normalMatrix * normal );',
-                'vUv = uv;',
-                '}'
-            ].join('\n'),
-            fragmentShader: [
-                'uniform sampler2D texture;',
-                'varying vec3 vNormal;',
-                'varying vec2 vUv;',
-                'void main() {',
-                'vec3 diffuse = texture2D( texture, vUv ).xyz;',
-                'float intensity = 1.05 - dot( vNormal, vec3( 0.0, 0.0, 1.0 ) );',
-                'vec3 atmosphere = vec3( 1.0, 1.0, 1.0 ) * pow( intensity, 3.0 );',
-                'gl_FragColor = vec4( diffuse + atmosphere, 1.0 );',
-                '}'
-            ].join('\n')
-        },
-        'atmosphere': {
-            uniforms: {},
-            vertexShader: [
-                'varying vec3 vNormal;',
-                'void main() {',
-                'vNormal = normalize( normalMatrix * normal );',
-                'gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );',
-                '}'
-            ].join('\n'),
-            fragmentShader: [
-                'varying vec3 vNormal;',
-                'void main() {',
-                'float intensity = pow( 0.8 - dot( vNormal, vec3( 0, 0, 1.0 ) ), 12.0 );',
-                'gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 ) * intensity;',
-                '}'
-            ].join('\n')
-        }
-    };
-
+export default function(container) {
     var camera, scene, renderer, w, h;
     var mesh, atmosphere, point;
 
@@ -90,7 +35,6 @@ export default DAT.Globe = function(container, opts) {
         camera.position.z = distance;
 
         scene = new THREE.Scene();
-        // sceneAtmosphere = new THREE.Scene();
 
         var geometry = new THREE.SphereGeometry(200, 40, 30);
 
@@ -158,41 +102,18 @@ export default DAT.Globe = function(container, opts) {
         }, false);
     }
 
-    function addData(data, opts) {
-        var lat, lng, size, color, i, step, colorFnWrapper;
+    var colorFn = function(x) {
+        var c = new THREE.Color();
+        c.setHSL((0.6 - (x * 0.5)), 1.0, 0.5);
+        return c;
+    };
 
-        opts.animated = opts.animated || false;
-        this.is_animated = opts.animated;
-        opts.format = opts.format || 'magnitude'; // other option is 'legend'
-        if (opts.format === 'magnitude') {
-            step = 3;
-            colorFnWrapper = function(data, i) { return colorFn(data[i + 2]); }
-        } else if (opts.format === 'legend') {
-            step = 4;
-            colorFnWrapper = function(data, i) { return colorFn(data[i + 3]); }
-        } else {
-            throw ('error: format not supported: ' + opts.format);
-        }
+    function addData(data) {
+        var lat, lng, size, color, i;
 
-        if (opts.animated) {
-            if (this._baseGeometry === undefined) {
-                this._baseGeometry = new THREE.Geometry();
-                for (i = 0; i < data.length; i += step) {
-                    lat = data[i];
-                    lng = data[i + 1];
-                    //        size = data[i + 2];
-                    color = colorFnWrapper(data, i);
-                    size = 0;
-                    addPoint(lat, lng, size, color, this._baseGeometry);
-                }
-            }
-            if (this._morphTargetId === undefined) {
-                this._morphTargetId = 0;
-            } else {
-                this._morphTargetId += 1;
-            }
-            opts.name = opts.name || 'morphTarget' + this._morphTargetId;
-        }
+        var colorFnWrapper = function(data, i) { return colorFn(data[i + 2]); }
+        var step = 3;
+
         var subgeo = new THREE.Geometry();
         for (i = 0; i < data.length; i += step) {
             lat = data[i];
@@ -202,12 +123,7 @@ export default DAT.Globe = function(container, opts) {
             size = size * 200;
             addPoint(lat, lng, size, color, subgeo);
         }
-        if (opts.animated) {
-            this._baseGeometry.morphTargets.push({ 'name': opts.name, vertices: subgeo.vertices });
-        } else {
-            this._baseGeometry = subgeo;
-        }
-
+        this._baseGeometry = subgeo;
     };
 
     function createPoints() {
@@ -357,7 +273,6 @@ export default DAT.Globe = function(container, opts) {
         camera.lookAt(mesh.position);
 
         renderer.render(scene, camera);
-        // renderer.render(sceneAtmosphere, camera);
     }
 
     init();

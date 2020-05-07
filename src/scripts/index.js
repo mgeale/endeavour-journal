@@ -2,7 +2,7 @@ import '../styles/style.css';
 import data from '../journal-entries/endeavour-journal.json';
 import Globe from '../scripts/globe';
 
-const start = () => {
+(() => {
     var container = document.createElement('div');
     container.id = 'container';
     document.body.appendChild(container);
@@ -41,9 +41,7 @@ const start = () => {
     for (let i = 0; i < data.length; i++) {
         coordinates.push(data[i].coordinates.latitude, data[i].coordinates.longitude, 0.01);
     }
-    globe.addData(coordinates, { format: 'magnitude', animated: true })
+    globe.addData(coordinates)
     globe.createPoints();
     globe.animate();
-};
-
-start();
+})();
