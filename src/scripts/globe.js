@@ -11,14 +11,14 @@ export default function(container) {
     var curZoomSpeed = 0;
     var zoomSpeed = 50;
 
-    var mouse = { x: 0, y: 0 },
-        mouseOnDown = { x: 0, y: 0 };
-    var rotation = { x: 0, y: 0 },
-        target = { x: Math.PI * 3 / 2, y: Math.PI / 6.0 },
-        targetOnDown = { x: 0, y: 0 };
+    var mouse = { x: 0, y: 0 };
+    var mouseOnDown = { x: 0, y: 0 };
+    var rotation = { x: 0, y: 0 };
+    var target = { x: Math.PI * 3 / 2, y: Math.PI / 6.0 };
+    var targetOnDown = { x: 0, y: 0 };
 
-    var distance = 100000,
-        distanceTarget = 100000;
+    var distance = 100000;
+    var distanceTarget = 100000;
     var padding = 40;
     var PI_HALF = Math.PI / 2;
 
@@ -27,7 +27,6 @@ export default function(container) {
         container.style.color = '#fff';
         container.style.font = '13px/20px Arial, sans-serif';
 
-        var shader, uniforms, material;
         w = container.offsetWidth || window.innerWidth;
         h = container.offsetHeight || window.innerHeight;
 
@@ -36,47 +35,23 @@ export default function(container) {
 
         scene = new THREE.Scene();
 
-        var geometry = new THREE.SphereGeometry(200, 40, 30);
+        const sphereGeometry = new THREE.SphereGeometry(200, 40, 30);
 
-        shader = Shaders['earth'];
-        uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+        const shader = Shaders.earth;
+        const uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 
-        uniforms['texture'].value = THREE.ImageUtils.loadTexture(WorldImage);
+        uniforms.texture.value = THREE.ImageUtils.loadTexture(WorldImage);
 
-        material = new THREE.ShaderMaterial({
+        const material = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: shader.vertexShader, fragmentShader: shader.fragmentShader });
 
-            uniforms: uniforms,
-            vertexShader: shader.vertexShader,
-            fragmentShader: shader.fragmentShader
-
-        });
-
-        mesh = new THREE.Mesh(geometry, material);
+        mesh = new THREE.Mesh(sphereGeometry, material);
         mesh.rotation.y = Math.PI;
         scene.add(mesh);
 
-        shader = Shaders['atmosphere'];
-        uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+        const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+        boxGeometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -0.5));
 
-        material = new THREE.ShaderMaterial({
-
-            uniforms: uniforms,
-            vertexShader: shader.vertexShader,
-            fragmentShader: shader.fragmentShader,
-            side: THREE.BackSide,
-            blending: THREE.AdditiveBlending,
-            transparent: true
-
-        });
-
-        mesh = new THREE.Mesh(geometry, material);
-        mesh.scale.set(1.1, 1.1, 1.1);
-        scene.add(mesh);
-
-        geometry = new THREE.BoxGeometry(0.75, 0.75, 1);
-        geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -0.5));
-
-        point = new THREE.Mesh(geometry);
+        point = new THREE.Mesh(boxGeometry);
 
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(w, h);
@@ -93,34 +68,25 @@ export default function(container) {
 
         window.addEventListener('resize', onWindowResize, false);
 
-        container.addEventListener('mouseover', function() {
+        container.addEventListener('mouseover', () => {
             overRenderer = true;
         }, false);
 
-        container.addEventListener('mouseout', function() {
+        container.addEventListener('mouseout', () => {
             overRenderer = false;
         }, false);
     }
 
-    var colorFn = function(x) {
-        var c = new THREE.Color();
-        c.setHSL((0.6 - (x * 0.5)), 1.0, 0.5);
-        return c;
-    };
-
     function addData(data) {
-        var lat, lng, size, color, i;
+        const subgeo = new THREE.Geometry();
+        const color = new THREE.Color('#FF0000');
 
-        var colorFnWrapper = function(data, i) { return colorFn(data[i + 2]); }
-        var step = 3;
+        const size = 2;
+        const step = 2;
 
-        var subgeo = new THREE.Geometry();
-        for (i = 0; i < data.length; i += step) {
-            lat = data[i];
-            lng = data[i + 1];
-            color = colorFnWrapper(data, i);
-            size = data[i + 2];
-            size = size * 200;
+        for (let i = 0; i < data.length; i += step) {
+            const lat = data[i];
+            const lng = data[i + 1];
             addPoint(lat, lng, size, color, subgeo);
         }
         this._baseGeometry = subgeo;
@@ -128,28 +94,17 @@ export default function(container) {
 
     function createPoints() {
         if (this._baseGeometry !== undefined) {
-            if (this.is_animated === false) {
-                this.points = new THREE.Mesh(this._baseGeometry, new THREE.MeshBasicMaterial({
-                    color: 0xffffff,
-                    vertexColors: THREE.FaceColors,
-                    morphTargets: false
-                }));
-            } else {
-                if (this._baseGeometry.morphTargets.length < 8) {
-                    console.log('t l', this._baseGeometry.morphTargets.length);
-                    var padding = 8 - this._baseGeometry.morphTargets.length;
-                    console.log('padding', padding);
-                    for (var i = 0; i <= padding; i++) {
-                        console.log('padding', i);
-                        this._baseGeometry.morphTargets.push({ 'name': 'morphPadding' + i, vertices: this._baseGeometry.vertices });
-                    }
+            if (this._baseGeometry.morphTargets.length < 8) {
+                var padding = 8 - this._baseGeometry.morphTargets.length;
+                for (var i = 0; i <= padding; i++) {
+                    this._baseGeometry.morphTargets.push({ 'name': 'morphPadding' + i, vertices: this._baseGeometry.vertices });
                 }
-                this.points = new THREE.Mesh(this._baseGeometry, new THREE.MeshBasicMaterial({
-                    color: 0xffffff,
-                    vertexColors: THREE.FaceColors,
-                    morphTargets: true
-                }));
             }
+            this.points = new THREE.Mesh(this._baseGeometry, new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                vertexColors: THREE.FaceColors,
+                morphTargets: true
+            }));
             scene.add(this.points);
         }
     }

@@ -3,11 +3,11 @@ import data from '../journal-entries/endeavour-journal.json';
 import Globe from '../scripts/globe';
 
 (() => {
-    var container = document.createElement('div');
+    const container = document.createElement('div');
     container.id = 'container';
     document.body.appendChild(container);
 
-    var info = document.createElement('div');
+    const info = document.createElement('div');
     info.id = 'info';
     info.innerHTML = `<strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong>
         <span class="bull">&bull;</span>
@@ -20,26 +20,21 @@ import Globe from '../scripts/globe';
         Earth map from <a href="http://orbitingeden.com/orrery/soloearth.html">Orbiting Eden</a>`;
     document.body.appendChild(info);
 
-    var title = document.createElement('div');
+    const title = document.createElement('div');
     title.id = 'title';
     title.innerHTML = `HMS Endeavour, 1768 to 1771`;
     document.body.appendChild(title);
 
-    var ce = document.createElement('a');
+    const ce = document.createElement('a');
     ce.id = 'ce';
     ce.href = 'http://www.chromeexperiments.com/globe';
     ce.innerHTML = `<span>This is a Chrome Experiment</span>`;
     document.body.appendChild(ce);
 
-    var container = document.getElementById('container');
-    var globe = new Globe(container);
-
-    console.log(globe);
-
-    window.data = data;
-    var coordinates = [];
+    const globe = new Globe(container);
+    let coordinates = [];
     for (let i = 0; i < data.length; i++) {
-        coordinates.push(data[i].coordinates.latitude, data[i].coordinates.longitude, 0.01);
+        coordinates.push(data[i].coordinates.latitude, data[i].coordinates.longitude);
     }
     globe.addData(coordinates)
     globe.createPoints();
