@@ -4,7 +4,7 @@ import Shaders from './shaders';
 
 export default function(container) {
     var camera, scene, renderer, w, h;
-    var mesh, atmosphere, point;
+    var mesh;
 
     var overRenderer;
 
@@ -48,11 +48,6 @@ export default function(container) {
         mesh.rotation.y = Math.PI;
         scene.add(mesh);
 
-        const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-        boxGeometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -0.5));
-
-        point = new THREE.Mesh(boxGeometry);
-
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(w, h);
 
@@ -79,15 +74,12 @@ export default function(container) {
 
     function addData(data) {
         const subgeo = new THREE.Geometry();
-        const color = new THREE.Color('#FF0000');
-
-        const size = 2;
         const step = 2;
 
         for (let i = 0; i < data.length; i += step) {
             const lat = data[i];
             const lng = data[i + 1];
-            addPoint(lat, lng, size, color, subgeo);
+            addPoint(lat, lng, subgeo);
         }
         this._baseGeometry = subgeo;
     };
@@ -109,10 +101,17 @@ export default function(container) {
         }
     }
 
-    function addPoint(lat, lng, size, color, subgeo) {
+    function addPoint(lat, lng, subgeo) {
+        const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+        boxGeometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0, -0.5));
 
-        var phi = (90 - lat) * Math.PI / 180;
-        var theta = (180 - lng) * Math.PI / 180;
+        const point = new THREE.Mesh(boxGeometry);
+        console.log(point)
+
+        const size = 2;
+
+        const phi = (90 - lat) * Math.PI / 180;
+        const theta = (180 - lng) * Math.PI / 180;
 
         point.position.x = 200 * Math.sin(phi) * Math.cos(theta);
         point.position.y = 200 * Math.cos(phi);
@@ -124,9 +123,8 @@ export default function(container) {
         point.updateMatrix();
 
         for (var i = 0; i < point.geometry.faces.length; i++) {
-
+            const color = new THREE.Color(1, i/10, 0);
             point.geometry.faces[i].color = color;
-
         }
         if (point.matrixAutoUpdate) {
             point.updateMatrix();
