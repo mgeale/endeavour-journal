@@ -19,7 +19,6 @@ export default function(container) {
 
     var distance = 100000;
     var distanceTarget = 100000;
-    var padding = 40;
     var PI_HALF = Math.PI / 2;
 
     function init() {
@@ -51,8 +50,6 @@ export default function(container) {
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(w, h);
 
-        renderer.domElement.style.position = 'absolute';
-
         container.appendChild(renderer.domElement);
 
         container.addEventListener('mousedown', onMouseDown, false);
@@ -75,40 +72,21 @@ export default function(container) {
     function addData(data) {
         const subgeo = new THREE.Geometry();
         const step = 2;
-
         for (let i = 0; i < data.length; i += step) {
             const lat = data[i];
             const lng = data[i + 1];
             addPoint(lat, lng, subgeo);
         }
-        this._baseGeometry = subgeo;
-    };
 
-    function createPoints() {
-        if (this._baseGeometry !== undefined) {
-            if (this._baseGeometry.morphTargets.length < 8) {
-                var padding = 8 - this._baseGeometry.morphTargets.length;
-                for (var i = 0; i <= padding; i++) {
-                    this._baseGeometry.morphTargets.push({ 'name': 'morphPadding' + i, vertices: this._baseGeometry.vertices });
-                }
-            }
-            this.points = new THREE.Mesh(this._baseGeometry, new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                vertexColors: THREE.FaceColors,
-                morphTargets: true
-            }));
-            scene.add(this.points);
-        }
-    }
+        this.points = new THREE.Mesh(subgeo, new THREE.MeshBasicMaterial());
+        scene.add(this.points);
+    };
 
     function addPoint(lat, lng, subgeo) {
         const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
         boxGeometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0, -0.5));
 
         const point = new THREE.Mesh(boxGeometry);
-        console.log(point)
-
-        const size = 2;
 
         const phi = (90 - lat) * Math.PI / 180;
         const theta = (180 - lng) * Math.PI / 180;
@@ -119,16 +97,8 @@ export default function(container) {
 
         point.lookAt(mesh.position);
 
-        point.scale.z = Math.max(size, 0.1); // avoid non-invertible matrix
-        point.updateMatrix();
+        point.scale.z = 1;
 
-        for (var i = 0; i < point.geometry.faces.length; i++) {
-            const color = new THREE.Color(1, i/10, 0);
-            point.geometry.faces[i].color = color;
-        }
-        if (point.matrixAutoUpdate) {
-            point.updateMatrix();
-        }
         subgeo.merge(point.geometry, point.matrix);
     }
 
@@ -152,7 +122,7 @@ export default function(container) {
         mouse.x = -event.clientX;
         mouse.y = event.clientY;
 
-        var zoomDamp = distance / 1000;
+        const zoomDamp = distance / 1000;
 
         target.x = targetOnDown.x + (mouse.x - mouseOnDown.x) * 0.005 * zoomDamp;
         target.y = targetOnDown.y + (mouse.y - mouseOnDown.y) * 0.005 * zoomDamp;
@@ -232,7 +202,6 @@ export default function(container) {
     this.animate = animate;
 
     this.addData = addData;
-    this.createPoints = createPoints;
     this.renderer = renderer;
     this.scene = scene;
 

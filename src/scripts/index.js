@@ -37,6 +37,6 @@ import Globe from '../scripts/globe';
         coordinates.push(data[i].coordinates.latitude, data[i].coordinates.longitude);
     }
     globe.addData(coordinates)
-    globe.createPoints();
+    // globe.createPoints();
     globe.animate();
 })();
